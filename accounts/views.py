@@ -1,0 +1,155 @@
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from rest_framework import generics, status
+from rest_framework.decorators import api_view, permission_classes 
+from rest_framework.permissions import IsAuthenticated 
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from .serializers import RegisterSerializer, UserSerializer, BusRegisterSerializer
+from .models import BusDetails 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
+# 1. Standard User Register
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            "user": UserSerializer(user).data,
+            "token": token.key,
+            "role": "user",
+            "message": "Account created successfully"
+        })
+
+# 2. Bus Register API
+@api_view(['POST'])
+def register_bus_view(request):
+    serializer = BusRegisterSerializer(data=request.data)
+    if serializer.is_valid():
+        bus_details = serializer.save()
+        user = bus_details.user
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            "user": UserSerializer(user).data,
+            "token": token.key,
+            "role": "bus",
+            "message": "Bus Registered successfully"
+        }, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# 3. Login API
+@api_view(['POST'])
+def login_view(request):
+    try:
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        # Replace print with logger
+        logger.info(f"Login Attempt: {email}") 
+
+        if not email or not password:
+            return Response({'error': 'Please provide both email and password'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user_obj = User.objects.filter(email__iexact=email).first()
+
+        if user_obj is None:
+            logger.warning(f"Login Failed: Email not found - {email}")
+            return Response({'error': 'User with this email does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = authenticate(username=user_obj.username, password=password)
+
+        if user is not None:
+            token, created = Token.objects.get_or_create(user=user)
+            is_bus_operator = hasattr(user, 'bus_details') # Fix: match model related_name='bus_details'
+            role = "bus" if is_bus_operator else "user"
+
+            logger.info(f"Login Success: {user.username} ({role})")
+            return Response({
+                "token": token.key,
+                "user": UserSerializer(user).data,
+                "role": role,
+                "message": "Login successful"
+            })
+        
+        logger.warning(f"Login Failed: Invalid Password - {email}")
+        return Response({"error": "Invalid Password"}, status=status.HTTP_400_BAD_REQUEST)
+
+    except Exception as e:
+        logger.error(f"Login Server Error: {str(e)}")
+        return Response({"error": "Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# ==========================================
+#  4. NEW: UPI & PROFILE MANAGEMENT
+# ==========================================
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_upi(request):
+    """ Allows Bus Operator to save/update their UPI ID """
+    upi_id = request.data.get('upi_id')
+    
+    if not upi_id or '@' not in upi_id:
+        return Response({"error": "Invalid UPI ID format"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        bus_details = BusDetails.objects.get(user=request.user)
+        bus_details.upi_id = upi_id
+        bus_details.save()
+        return Response({
+            "message": "UPI ID Linked Successfully!", 
+            "upi_id": upi_id
+        })
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Bus Operator profile not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def toggle_booking_status(request):
+    try:
+        bus = BusDetails.objects.get(user=request.user)
+        # Flip the status
+        bus.is_booking_open = not bus.is_booking_open
+        bus.save()
+        return Response({
+            "status": bus.is_booking_open, 
+            "message": f"Online Booking is now {'ON' if bus.is_booking_open else 'OFF'}"
+        })
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Bus profile not found"}, status=404)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_bus_profile(request):
+    try:
+        bus = BusDetails.objects.get(user=request.user)
+        return Response({
+            "upi_id": bus.upi_id,
+            "total_earnings": bus.total_earnings,
+            "is_booking_open": bus.is_booking_open, 
+        })
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Bus profile not found"}, status=404)
+
+# ==========================================
+#  5. NEW: GENERIC USER PROFILE (For Header)
+# ==========================================
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_current_user(request):
+    """
+    Returns the username of the currently logged-in user.
+    Works for BOTH Regular Users and Bus Operators.
+    """
+    return Response({
+        "username": request.user.username,
+        "email": request.user.email,
+        # Check if they have a bus profile to flag them as operator
+        "is_bus_operator": hasattr(request.user, 'bus_details')
+    })

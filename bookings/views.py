@@ -1,0 +1,136 @@
+import razorpay
+import os
+from django.db.models import F 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Booking
+from routes.models import Route
+from accounts.models import BusDetails
+import random
+import string
+from decimal import Decimal
+
+# --- 1. CONFIGURATION ---
+# We are hardcoding these temporarily to fix your "Authentication Failed" error.
+# If these are your OLD keys and they are blocked, generate NEW ones in Razorpay Dashboard and paste here.
+RAZORPAY_KEY_ID = 'rzp_test_SBBD36grpi2lzh' 
+RAZORPAY_KEY_SECRET = 'RLS4RcRH1gAUCnML8GwCbjTr'
+
+client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+
+def generate_ticket_id():
+    return "TKT-" + ''.join(random.choices(string.digits, k=6))
+
+# ==========================================
+#  2. PAYMENT FLOW
+# ==========================================
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def initiate_payment(request):
+    amount = request.data.get('amount') 
+    if not amount: return Response({"error": "Amount is required"}, 400)
+    
+    try:
+        data = { "amount": int(amount) * 100, "currency": "INR", "payment_capture": "1" }
+        order = client.order.create(data=data)
+        return Response({
+            "order_id": order['id'], 
+            "amount": data['amount'], 
+            "key": RAZORPAY_KEY_ID
+        })
+    except Exception as e:
+        return Response({"error": str(e)}, 400)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_payment(request):
+    """ Step 2: Verify & Create Ticket """
+    data = request.data
+    
+    # Extract Data
+    razorpay_order_id = data.get('razorpay_order_id')
+    razorpay_payment_id = data.get('razorpay_payment_id')
+    razorpay_signature = data.get('razorpay_signature')
+    
+    route_id = data.get('route_id')
+    from_loc = data.get('from')
+    to_loc = data.get('to')
+    price = data.get('price')
+
+    params_dict = {
+        'razorpay_order_id': razorpay_order_id,
+        'razorpay_payment_id': razorpay_payment_id,
+        'razorpay_signature': razorpay_signature
+    }
+
+    try:
+        # 1. Verify Signature
+        client.utility.verify_payment_signature(params_dict)
+        
+        # 2. Get Bus & Create Ticket
+        route = Route.objects.get(id=route_id)
+        
+        ticket_id = generate_ticket_id()
+        while Booking.objects.filter(ticket_id=ticket_id).exists():
+            ticket_id = generate_ticket_id()
+
+        booking = Booking.objects.create(
+            ticket_id=ticket_id,
+            bus=route.bus,
+            route=route,
+            from_loc=from_loc,
+            to_loc=to_loc,
+            price=price,
+            is_verified=False 
+        )
+
+        return Response({
+            "ticket_id": booking.ticket_id,
+            "bus_name": booking.bus.bus_name,
+            "from": booking.from_loc,
+            "to": booking.to_loc,
+            "date": booking.created_at.strftime("%Y-%m-%d %H:%M")
+        }, status=status.HTTP_201_CREATED)
+
+    except razorpay.errors.SignatureVerificationError:
+        return Response({"error": "Payment Verification Failed"}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+# ==========================================
+#  3. OPERATOR VERIFICATION
+# ==========================================
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated]) 
+def verify_ticket(request):
+    ticket_id = request.data.get('ticket_id')
+    try:
+        operator_bus = BusDetails.objects.get(user=request.user)
+        ticket = Booking.objects.get(ticket_id=ticket_id)
+
+        if ticket.bus.id != operator_bus.id:
+            return Response({"error": "Invalid Bus! Ticket belongs to another operator."}, 403)
+
+        if ticket.is_verified:
+            return Response({"error": "Ticket already used."}, 400)
+
+        ticket.is_verified = True
+        ticket.save()
+
+        # --- FINANCIAL SAFETY FIX ---
+        operator_bus.total_earnings = F('total_earnings') + Decimal(str(ticket.price))
+        operator_bus.save()
+        
+        operator_bus.refresh_from_db() 
+
+        return Response({
+            "message": "Verified!", 
+            "transfer_msg": f"₹{ticket.price} added to wallet."
+        }, 200)
+
+    except (BusDetails.DoesNotExist, Booking.DoesNotExist):
+        return Response({"error": "Invalid Request"}, 404)
