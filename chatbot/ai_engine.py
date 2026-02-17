@@ -61,7 +61,7 @@ def get_rag_response(user_query):
         messages=[
             {'role': 'system', 'content': instruction_prompt},
             {'role': 'user', 'content': user_query}
-        ]
-    )
+       ]
+    ) 
     
     return response['message']['content']

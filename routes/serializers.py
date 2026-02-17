@@ -31,23 +31,28 @@ class RouteSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         trips_data = validated_data.pop('trips')
-        validated_data.pop('stops', []) 
+        stops_data = validated_data.pop('stops', []) 
         
         start_name = validated_data.get('start_location')
         end_name = validated_data.get('end_location')
         via_name = validated_data.get('via')
+        
+        # 1. Ensure Start/End Locations exist in DB (for search ability)
+        from .models import Location, RouteTemplate, TemplateStop 
+        start_loc_obj, _ = Location.objects.get_or_create(name=start_name)
+        end_loc_obj, _ = Location.objects.get_or_create(name=end_name)
 
         # Log the action (Info Level)
         logger.info(f"Creating Route: {start_name} -> {end_name} (Via: {via_name})")
 
-        # 1. Create Route
+        # 2. Create Route
         route = Route.objects.create(**validated_data)
 
-        # 2. Create Trips
+        # 3. Create Trips
         for trip in trips_data:
             Trip.objects.create(route=route, **trip)
 
-        # 3. AUTO-ASSIGN STOPS (Business Logic)
+        # 4. AUTO-ASSIGN STOPS (Business Logic)
         try:
             # A. Check Direct Match
             template = RouteTemplate.objects.get(
@@ -78,7 +83,27 @@ class RouteSerializer(serializers.ModelSerializer):
                     RouteStop.objects.create(route=route, location=t_stop.location, stop_number=index + 1)
 
             except RouteTemplate.DoesNotExist:
-                # Log as warning so you know something might be wrong with the templates
-                logger.warning("No matching template found. Route created without stops.")
+                # C. NO TEMPLATE FOUND -> CREATE NEW ONE (LEARNING)
+                logger.info(f"No template found. Learning new route: {start_name} -> {end_name}")
+                
+                # Always create a new template for this path
+                new_template = RouteTemplate.objects.create(
+                    start_location=start_loc_obj,
+                    end_location=end_loc_obj,
+                    via=via_name
+                )
+                
+                if stops_data:
+                    for index, stop_name in enumerate(stops_data):
+                        # Get/Create Location for Stop
+                        loc_obj, _ = Location.objects.get_or_create(name=stop_name)
+                        
+                        # Create RouteStop (For this specific bus route)
+                        RouteStop.objects.create(route=route, location=loc_obj, stop_number=index + 1)
+                        
+                        # Create TemplateStop (For future re-use)
+                        TemplateStop.objects.create(template=new_template, location=loc_obj, stop_number=index + 1)
+                        
+                logger.info(f"Created new RouteTemplate ID {new_template.id} with {len(stops_data)} stops.")
 
         return route

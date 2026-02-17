@@ -2,17 +2,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes 
-from rest_framework.permissions import IsAuthenticated 
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from .serializers import RegisterSerializer, UserSerializer, BusRegisterSerializer
+from .serializers import RegisterSerializer, UserSerializer, BusRegisterSerializer, SetNewPasswordSerializer
 from .models import BusDetails 
 import logging
-
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.core.mail import send_mail
+from django.conf import settings
+from .tokens import custom_token_generator # <--- CRITICAL IMPORT
 
 logger = logging.getLogger(__name__)
 
-# 1. Standard User Register
+# ==========================================
+# 1. AUTHENTICATION (Register/Login)
+# ==========================================
+
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     def create(self, request, *args, **kwargs):
@@ -27,7 +34,6 @@ class RegisterView(generics.CreateAPIView):
             "message": "Account created successfully"
         })
 
-# 2. Bus Register API
 @api_view(['POST'])
 def register_bus_view(request):
     serializer = BusRegisterSerializer(data=request.data)
@@ -43,14 +49,12 @@ def register_bus_view(request):
         }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# 3. Login API
 @api_view(['POST'])
 def login_view(request):
     try:
         email = request.data.get('email')
         password = request.data.get('password')
 
-        # Replace print with logger
         logger.info(f"Login Attempt: {email}") 
 
         if not email or not password:
@@ -66,7 +70,7 @@ def login_view(request):
 
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
-            is_bus_operator = hasattr(user, 'bus_details') # Fix: match model related_name='bus_details'
+            is_bus_operator = hasattr(user, 'bus_details') 
             role = "bus" if is_bus_operator else "user"
 
             logger.info(f"Login Success: {user.username} ({role})")
@@ -85,15 +89,13 @@ def login_view(request):
         return Response({"error": "Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # ==========================================
-#  4. NEW: UPI & PROFILE MANAGEMENT
+# 2. PROFILE MANAGEMENT
 # ==========================================
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def update_upi(request):
-    """ Allows Bus Operator to save/update their UPI ID """
     upi_id = request.data.get('upi_id')
-    
     if not upi_id or '@' not in upi_id:
         return Response({"error": "Invalid UPI ID format"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -101,10 +103,7 @@ def update_upi(request):
         bus_details = BusDetails.objects.get(user=request.user)
         bus_details.upi_id = upi_id
         bus_details.save()
-        return Response({
-            "message": "UPI ID Linked Successfully!", 
-            "upi_id": upi_id
-        })
+        return Response({"message": "UPI ID Linked Successfully!", "upi_id": upi_id})
     except BusDetails.DoesNotExist:
         return Response({"error": "Bus Operator profile not found"}, status=status.HTTP_404_NOT_FOUND)
     
@@ -113,7 +112,6 @@ def update_upi(request):
 def toggle_booking_status(request):
     try:
         bus = BusDetails.objects.get(user=request.user)
-        # Flip the status
         bus.is_booking_open = not bus.is_booking_open
         bus.save()
         return Response({
@@ -136,20 +134,62 @@ def get_bus_profile(request):
     except BusDetails.DoesNotExist:
         return Response({"error": "Bus profile not found"}, status=404)
 
-# ==========================================
-#  5. NEW: GENERIC USER PROFILE (For Header)
-# ==========================================
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_current_user(request):
-    """
-    Returns the username of the currently logged-in user.
-    Works for BOTH Regular Users and Bus Operators.
-    """
     return Response({
         "username": request.user.username,
         "email": request.user.email,
-        # Check if they have a bus profile to flag them as operator
         "is_bus_operator": hasattr(request.user, 'bus_details')
     })
+
+# ==========================================
+# 3. FORGOT PASSWORD (Single, Correct Version)
+# ==========================================
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def forgot_password_request(request):
+    email = request.data.get('email')
+
+    if not User.objects.filter(email=email).exists():
+        return Response({'message': 'If an account exists, a reset link has been sent.'}, status=status.HTTP_200_OK)
+
+    user = User.objects.get(email=email)
+    
+    # 1. Generate Token
+    uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+    token = custom_token_generator.make_token(user) 
+    
+    # =====================================================
+    # 2. IMMEDIATE DEBUG CHECK (The Sanity Check)
+    # =====================================================
+    print("\n" + "="*50)
+    print("DEBUG: TESTING TOKEN IMMEDIATELY IN VIEW...")
+    is_valid_now = custom_token_generator.check_token(user, token)
+    print(f"DEBUG: Token generated: {token}")
+    print(f"DEBUG: Is it valid right now? {is_valid_now}")
+    print("="*50 + "\n")
+    # =====================================================
+
+    reset_link = f"http://localhost:5173/reset-password/{uidb64}/{token}"
+    
+    # Send Email
+    subject = "Reset your TravelSync Password"
+    message = f"Hi {user.username},\n\nClick the link below to reset your password:\n{reset_link}"
+    
+    try:
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+        return Response({'message': 'Password reset link sent to your email.'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print("EMAIL ERROR:", e)
+        return Response({'error': 'Failed to send email.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['PATCH'])
+@permission_classes([AllowAny])
+def reset_password_confirm(request):
+    serializer = SetNewPasswordSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Password reset successfully'}, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
