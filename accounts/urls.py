@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     # Auth Endpoints
     path('register/', views.RegisterView.as_view(), name='register'),
+    path('check-availability/', views.check_availability, name='check_availability'),
     path('login/', views.login_view, name='login'),
     
     # --- NEW: Get Current User (For Header) ---
