@@ -49,6 +49,29 @@ def register_bus_view(request):
         }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def check_availability(request):
+    username = request.query_params.get('username')
+    email = request.query_params.get('email')
+    
+    if username:
+        is_taken = User.objects.filter(username__iexact=username).exists()
+        return Response({'available': not is_taken, 'field': 'username'})
+    
+    if email:
+        is_taken = User.objects.filter(email__iexact=email).exists()
+        return Response({'available': not is_taken, 'field': 'email'})
+
+    reg_number = request.query_params.get('reg_number')
+    if reg_number:
+        is_taken = BusDetails.objects.filter(reg_number__iexact=reg_number).exists()
+        return Response({'available': not is_taken, 'field': 'reg_number'})
+        
+    return Response({'error': 'Missing query param'}, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['POST'])
 def login_view(request):
     try:

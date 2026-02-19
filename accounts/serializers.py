@@ -14,6 +14,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email']
 
 class RegisterSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
@@ -38,7 +43,9 @@ class BusRegisterSerializer(serializers.ModelSerializer):
     # ---------------------------
     password = serializers.CharField(write_only=True)
     bus_name = serializers.CharField()
-    reg_number = serializers.CharField()
+    reg_number = serializers.CharField(
+        validators=[UniqueValidator(queryset=BusDetails.objects.all())]
+    )
 
     class Meta:
         model = BusDetails
