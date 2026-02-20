@@ -45,7 +45,7 @@ def initiate_payment(request):
         return Response({"error": str(e)}, 400)
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def verify_payment(request):
     """ Step 2: Verify & Create Ticket """
     data = request.data
@@ -79,6 +79,7 @@ def verify_payment(request):
 
         booking = Booking.objects.create(
             ticket_id=ticket_id,
+            user=request.user, # NEW: Associate ticket with logged in user
             bus=route.bus,
             route=route,
             from_loc=from_loc,
@@ -134,3 +135,30 @@ def verify_ticket(request):
 
     except (BusDetails.DoesNotExist, Booking.DoesNotExist):
         return Response({"error": "Invalid Request"}, 404)
+
+# ==========================================
+#  4. USER TICKETS
+# ==========================================
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_tickets(request):
+    try:
+        # Fetch tickets for the logged in user, newest first
+        bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
+        
+        ticket_data = []
+        for booking in bookings:
+            ticket_data.append({
+                "ticket_id": booking.ticket_id,
+                "bus_name": booking.bus.bus_name,
+                "from_loc": booking.from_loc,
+                "to_loc": booking.to_loc,
+                "price": str(booking.price),
+                "date": booking.created_at.strftime("%Y-%m-%d %H:%M"),
+                "is_verified": booking.is_verified
+            })
+            
+        return Response(ticket_data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
