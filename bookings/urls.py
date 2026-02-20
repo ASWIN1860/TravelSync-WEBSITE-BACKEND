@@ -8,4 +8,7 @@ urlpatterns = [
     
     # Operator Verification (Scanning)
     path('verify/', views.verify_ticket, name='verify_ticket'),
+    
+    # User Tickets
+    path('my-tickets/', views.get_user_tickets, name='get_user_tickets'),
 ]
