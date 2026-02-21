@@ -12,7 +12,27 @@ class Route(models.Model):
     start_location = models.CharField(max_length=100)
     end_location = models.CharField(max_length=100)
     via = models.CharField(max_length=100, blank=True, null=True) 
+    
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('closed_today', 'Closed Today'),
+        ('closed_permanently', 'Closed Permanently')
+    ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
+    status_updated_at = models.DateTimeField(auto_now=True)
+    
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def effective_status(self):
+        if self.status == 'closed_today':
+            from django.utils import timezone
+            # If the date the status was updated is before today, it means the "today" has passed.
+            if timezone.localtime(self.status_updated_at).date() < timezone.localdate():
+                self.status = 'active'
+                self.save(update_fields=['status'])
+                return 'active'
+        return self.status
 
     def __str__(self):
         return f"{self.bus.bus_name}: {self.start_location} -> {self.end_location}"
@@ -59,3 +79,14 @@ class TemplateStop(models.Model):
 
     def __str__(self):
         return f"{self.template} - {self.stop_number}: {self.location}"
+
+class FavoriteRoute(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='favorite_routes')
+    route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name='favorited_by')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'route')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.route}"
