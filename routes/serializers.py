@@ -24,10 +24,11 @@ class RouteSerializer(serializers.ModelSerializer):
     
     # --- OPTIMIZATION: Get Status Directly ---
     is_booking_open = serializers.BooleanField(source='bus.is_booking_open', read_only=True)
+    effective_status = serializers.ReadOnlyField()
 
     class Meta:
         model = Route
-        fields = ['id', 'bus_name', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open']
+        fields = ['id', 'bus_name', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open', 'effective_status']
 
     def create(self, validated_data):
         trips_data = validated_data.pop('trips')

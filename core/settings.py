@@ -141,12 +141,10 @@ REST_FRAMEWORK = {
 
 import os
 
-# ... existing code ...
 
 # EMAIL CONFIGURATION (SMTP)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-# --- CHANGE THESE 3 LINES ---
 EMAIL_PORT = 465          # Changed from 587
 EMAIL_USE_TLS = False     # Changed from True
 EMAIL_USE_SSL = True

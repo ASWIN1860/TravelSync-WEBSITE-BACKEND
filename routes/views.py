@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
 
-from .models import Route, Location, RouteTemplate
+from .models import Route, Location, RouteTemplate, FavoriteRoute
 from accounts.models import BusDetails
 from .serializers import RouteSerializer
 
@@ -123,13 +123,32 @@ def get_template_vias(request):
     if not start_name or not end_name:
         return Response([])
 
-    # --- OPTIMIZATION: Use Q objects for single DB hit ---
+    # --- FIXED: Return objects with via and stops ---
     templates = RouteTemplate.objects.filter(
         Q(start_location__name__iexact=start_name, end_location__name__iexact=end_name) |
         Q(start_location__name__iexact=end_name, end_location__name__iexact=start_name)
-    ).values_list('via', flat=True).distinct()
+    ).prefetch_related('stops__location').distinct()
 
-    valid_vias = [v for v in templates if v] # Filter out empty strings
+    valid_vias = []
+    seen_vias = set()
+
+    for t in templates:
+        if not t.via or t.via in seen_vias:
+            continue
+        seen_vias.add(t.via)
+        
+        # Order the stops by stop_number
+        sorted_stops = sorted(t.stops.all(), key=lambda x: x.stop_number)
+        stop_names = [stop.location.name for stop in sorted_stops]
+        
+        # Check if we queried in reverse order of the stored template
+        if t.end_location.name.lower() == start_name.lower() and t.start_location.name.lower() == end_name.lower():
+            stop_names.reverse()
+            
+        valid_vias.append({
+            "via": t.via,
+            "stops": stop_names
+        })
     
     return Response(valid_vias)
 
@@ -147,3 +166,56 @@ def delete_route(request, route_id):
         return Response({"error": "Unauthorized"}, status=status.HTTP_403_FORBIDDEN)
     except Route.DoesNotExist:
         return Response({"error": "Route not found or access denied"}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def toggle_favorite(request):
+    route_id = request.data.get('route_id')
+    if not route_id:
+        return Response({"error": "route_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+        
+    try:
+        route = Route.objects.get(id=route_id)
+    except Route.DoesNotExist:
+        return Response({"error": "Route not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    favorite, created = FavoriteRoute.objects.get_or_create(user=request.user, route=route)
+    
+    if not created:
+        favorite.delete()
+        return Response({"message": "Route removed from favorites", "is_favorite": False}, status=status.HTTP_200_OK)
+        
+    return Response({"message": "Route added to favorites", "is_favorite": True}, status=status.HTTP_201_CREATED)
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def toggle_route_status(request):
+    try:
+        bus_details = BusDetails.objects.get(user=request.user)
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Unauthorized"}, status=status.HTTP_403_FORBIDDEN)
+
+    route_id = request.data.get('route_id')
+    new_status = request.data.get('status')
+
+    if not route_id or not new_status:
+        return Response({"error": "route_id and status are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    if new_status not in ['active', 'closed_today', 'closed_permanently']:
+        return Response({"error": "Invalid status type"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        route = Route.objects.get(id=route_id, bus=bus_details)
+        route.status = new_status
+        route.save(update_fields=['status', 'status_updated_at']) # auto_now handles the timestamp
+        return Response({"message": f"Route status updated to {new_status}", "effective_status": route.effective_status}, status=status.HTTP_200_OK)
+    except Route.DoesNotExist:
+        return Response({"error": "Route not found or access denied"}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_favorites(request):
+    favorites = FavoriteRoute.objects.filter(user=request.user).select_related('route', 'route__bus').prefetch_related('route__stops__location', 'route__trips')
+    routes = [fav.route for fav in favorites]
+    serializer = RouteSerializer(routes, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
