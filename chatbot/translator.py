@@ -1,7 +1,14 @@
 from deep_translator import GoogleTranslator
 
 def to_english(text):
-    return GoogleTranslator(source="auto", target="en").translate(text)
+    try:
+        return GoogleTranslator(source="ml", target="en").translate(text)
+    except:
+        return text
+
 
 def to_malayalam(text):
-    return GoogleTranslator(source="auto", target="ml").translate(text)
+    try:
+        return GoogleTranslator(source="en", target="ml").translate(text)
+    except:
+        return text
