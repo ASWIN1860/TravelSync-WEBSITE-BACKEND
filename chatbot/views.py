@@ -4,11 +4,12 @@ from rest_framework import status
 from .services import ask_ai
 from .translator import to_english, to_malayalam
 
+
 class ChatAPIView(APIView):
 
     def post(self, request):
         question = request.data.get("question")
-        language = request.data.get("language", "en")  # default en
+        language = request.data.get("language", "en")
 
         if not question:
             return Response(
@@ -22,19 +23,26 @@ class ChatAPIView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Translate input
-        if language == "ml":
-            question = to_english(question)
+        # Special ping for frontend status check
+        if question == "ping":
+            return Response({"status": "ok"})
 
-        # Chatbot/AI logic
-        answer = ask_ai(question)
-        
-# if the language is malayualam question is translated to english and answer is translated back to malayalam
+        try:
+            # Translate Malayalam → English
+            if language == "ml":
+                question = to_english(question)
 
-        # Translate output
-        if language == "ml":
-            answer = to_malayalam(answer)
+            # Ask AI
+            answer = ask_ai(question)
 
-        return Response({
-            "answer": answer
-        }, status=status.HTTP_200_OK)
+            # Translate back if needed
+            if language == "ml":
+                answer = to_malayalam(answer)
+
+            return Response({"answer": answer})
+
+        except Exception as e:
+            return Response(
+                {"error": "Server error", "details": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
