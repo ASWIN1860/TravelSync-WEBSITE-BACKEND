@@ -11,4 +11,5 @@ urlpatterns = [
     path('toggle-route-status/', views.toggle_route_status, name='toggle_route_status'),
     path('toggle-favorite/', views.toggle_favorite, name='toggle_favorite'),
     path('my-favorites/', views.my_favorites, name='my_favorites'),
+    path('notify/', views.set_route_notification, name='set_route_notification'),
 ]
