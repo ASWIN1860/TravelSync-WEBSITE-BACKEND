@@ -90,3 +90,16 @@ class FavoriteRoute(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.route}"
+
+class RouteNotification(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='notifications')
+    route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name='notifications')
+    stop_name = models.CharField(max_length=150)
+    notify_minutes = models.PositiveIntegerField(default=15)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'route', 'stop_name')
+
+    def __str__(self):
+        return f"{self.user.username} notify {self.notify_minutes}m before {self.stop_name} on {self.route.id}"

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
 
-from .models import Route, Location, RouteTemplate, FavoriteRoute
+from .models import Route, Location, RouteTemplate, FavoriteRoute, RouteNotification
 from accounts.models import BusDetails
 from .serializers import RouteSerializer
 
@@ -219,3 +219,29 @@ def my_favorites(request):
     routes = [fav.route for fav in favorites]
     serializer = RouteSerializer(routes, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def set_route_notification(request):
+    route_id = request.data.get('route_id')
+    stop_name = request.data.get('stop_name')
+    notify_minutes = request.data.get('notify_minutes')
+
+    if not all([route_id, stop_name, notify_minutes]):
+        return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        route = Route.objects.get(id=route_id)
+        # Create or Update the notification preference for this user+route+stop combo
+        notification, created = RouteNotification.objects.update_or_create(
+            user=request.user,
+            route=route,
+            stop_name=stop_name,
+            defaults={'notify_minutes': int(notify_minutes)}
+        )
+        msg = "Notification preference saved!" if created else "Notification preference updated!"
+        return Response({"message": msg}, status=status.HTTP_200_OK)
+    except Route.DoesNotExist:
+        return Response({"error": "Route not found"}, status=status.HTTP_404_NOT_FOUND)
+    except ValueError:
+        return Response({"error": "Invalid notify_minutes value"}, status=status.HTTP_400_BAD_REQUEST)
