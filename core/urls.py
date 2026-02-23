@@ -16,4 +16,7 @@ urlpatterns = [
     path('api/bookings/', include('bookings.urls')),
 
     path('api/chatbot/', include('chatbot.urls')),
+    
+    # Admin Panel APIs
+    path('api/admin/', include('admin_panel.urls')),
 ]

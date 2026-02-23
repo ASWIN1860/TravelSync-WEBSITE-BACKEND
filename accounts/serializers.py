@@ -7,6 +7,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from .tokens import custom_token_generator
+from admin_panel.models import Notice
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -117,5 +118,10 @@ class SetNewPasswordSerializer(serializers.Serializer):
         user.set_password(password)
         user.save()
         return user
+
+class NoticePublicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notice
+        fields = ['id', 'title', 'description', 'created_at']
             
         

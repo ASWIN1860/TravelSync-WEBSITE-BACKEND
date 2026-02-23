@@ -63,6 +63,7 @@ class RouteTemplate(models.Model):
     start_location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='templates_start')
     end_location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='templates_end')
     via = models.CharField(max_length=100, blank=True, null=True, help_text="e.g. Civil Station, Medical College") # <--- NEW FIELD
+    created_by = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, blank=True, related_name='created_templates')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

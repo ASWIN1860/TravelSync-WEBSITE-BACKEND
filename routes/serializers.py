@@ -87,11 +87,16 @@ class RouteSerializer(serializers.ModelSerializer):
                 # C. NO TEMPLATE FOUND -> CREATE NEW ONE (LEARNING)
                 logger.info(f"No template found. Learning new route: {start_name} -> {end_name}")
                 
+                # Determine the user creating the template
+                bus_details = validated_data.get('bus')
+                creator_user = bus_details.user if bus_details else None
+
                 # Always create a new template for this path
                 new_template = RouteTemplate.objects.create(
                     start_location=start_loc_obj,
                     end_location=end_loc_obj,
-                    via=via_name
+                    via=via_name,
+                    created_by=creator_user
                 )
                 
                 if stops_data:

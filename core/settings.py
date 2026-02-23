@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'routes',
     'bookings',
     'chatbot',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [
