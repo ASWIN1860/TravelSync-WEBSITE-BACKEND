@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import generics, status
-from rest_framework.decorators import api_view, permission_classes 
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from .serializers import RegisterSerializer, UserSerializer, BusRegisterSerializer, SetNewPasswordSerializer
+from .serializers import RegisterSerializer, UserSerializer, BusRegisterSerializer, SetNewPasswordSerializer, NoticePublicSerializer
 from .models import BusDetails 
+from admin_panel.models import Notice
 import logging
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -93,8 +94,13 @@ def login_view(request):
 
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
-            is_bus_operator = hasattr(user, 'bus_details') 
-            role = "bus" if is_bus_operator else "user"
+            
+            # Determine Role
+            if user.is_superuser:
+                role = "admin"
+            else:
+                is_bus_operator = hasattr(user, 'bus_details') 
+                role = "bus" if is_bus_operator else "user"
 
             logger.info(f"Login Success: {user.username} ({role})")
             return Response({
@@ -216,3 +222,46 @@ def reset_password_confirm(request):
         serializer.save()
         return Response({'message': 'Password reset successfully'}, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# ==========================================
+# 4. NOTIFICATIONS (Public / User Targeted)
+# ==========================================
+
+from rest_framework.authentication import TokenAuthentication
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
+def get_my_notices(request):
+    """
+    Returns relevant notices based on the user's logged-in state and role.
+    """
+    from django.db.models import Q
+
+    print(f"DEBUG NOTICES: Fetching notices for user: {request.user} (Authenticated: {request.user.is_authenticated})")
+    
+    if not request.user.is_authenticated:
+        # Guests only see public broadcasts
+        query = Q(target_audience__in=['all_users', 'all_passengers'])
+        print("DEBUG NOTICES: User is GUEST. Generating Guest query.")
+    else:
+        is_bus_operator = hasattr(request.user, 'bus_details')
+        print(f"DEBUG NOTICES: User is Authenticated. Is Bus Operator? {is_bus_operator}")
+        
+        # Build base query
+        # Everyone authenticated sees 'all_users' and 'specific_user' alerts meant for them
+        query = Q(target_audience='all_users') | Q(specific_user=request.user)
+
+        # Add role-specific targets
+        if is_bus_operator:
+            query |= Q(target_audience='all_bus_operators')
+        else:
+            # Standard passengers
+            query |= Q(target_audience='all_passengers')
+            
+        print(f"DEBUG NOTICES: Query constructed as: {query}")
+
+    notices = Notice.objects.filter(query).order_by('-created_at')
+    print(f"DEBUG NOTICES: Found {notices.count()} notices.")
+    serializer = NoticePublicSerializer(notices, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
