@@ -19,6 +19,4 @@ urlpatterns = [
     path('forgot-password/', views.forgot_password_request, name='forgot-password'),
     path('reset-password-confirm/', views.reset_password_confirm, name='reset-password-confirm'),
     
-    # Public Notices
-    path('my-notices/', views.get_my_notices, name='get-my-notices'),
 ]

@@ -4,15 +4,13 @@ from django.contrib.auth.models import User
 from accounts.models import BusDetails
 from routes.models import Route, Location, RouteTemplate
 from bookings.models import Booking
-from .models import Notice
 from .serializers import (
     UserAdminSerializer,
     BusDetailsAdminSerializer,
     LocationAdminSerializer,
     RouteAdminSerializer,
     RouteTemplateAdminSerializer,
-    BookingAdminSerializer,
-    NoticeAdminSerializer
+    BookingAdminSerializer
 )
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -44,11 +42,3 @@ class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all().order_by('-created_at')
     serializer_class = BookingAdminSerializer
     permission_classes = [IsAdminUser]
-
-class NoticeViewSet(viewsets.ModelViewSet):
-    queryset = Notice.objects.all().order_by('-created_at')
-    serializer_class = NoticeAdminSerializer
-    permission_classes = [IsAdminUser]
-
-    def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
