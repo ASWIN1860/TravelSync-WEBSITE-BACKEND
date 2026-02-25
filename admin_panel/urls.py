@@ -6,8 +6,7 @@ from .views import (
     LocationViewSet,
     RouteViewSet,
     RouteTemplateViewSet,
-    BookingViewSet,
-    NoticeViewSet
+    BookingViewSet
 )
 
 router = DefaultRouter()
@@ -17,7 +16,6 @@ router.register(r'locations', LocationViewSet, basename='admin-location')
 router.register(r'routes', RouteViewSet, basename='admin-route')
 router.register(r'templates', RouteTemplateViewSet, basename='admin-template')
 router.register(r'bookings', BookingViewSet, basename='admin-booking')
-router.register(r'notices', NoticeViewSet, basename='admin-notice')
 
 urlpatterns = [
     path('', include(router.urls)),

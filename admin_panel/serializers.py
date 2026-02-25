@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from accounts.models import BusDetails
 from routes.models import Route, Location, RouteTemplate
 from bookings.models import Booking
-from .models import Notice
 
 class UserAdminSerializer(serializers.ModelSerializer):
     class Meta:
@@ -64,11 +63,4 @@ class BookingAdminSerializer(serializers.ModelSerializer):
         model = Booking
         fields = '__all__'
 
-class NoticeAdminSerializer(serializers.ModelSerializer):
-    creator_name = serializers.CharField(source='created_by.username', read_only=True)
-    specific_user_email = serializers.CharField(source='specific_user.email', read_only=True)
-
-    class Meta:
-        model = Notice
         fields = '__all__'
-        read_only_fields = ['created_by', 'created_at']
