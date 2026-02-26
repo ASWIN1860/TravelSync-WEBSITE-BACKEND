@@ -245,3 +245,21 @@ def set_route_notification(request):
         return Response({"error": "Route not found"}, status=status.HTTP_404_NOT_FOUND)
     except ValueError:
         return Response({"error": "Invalid notify_minutes value"}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_live_location(request, route_id):
+    try:
+        route = Route.objects.select_related('bus').get(id=route_id)
+        bus = route.bus
+        
+        if not bus.current_lat or not bus.current_lng:
+            return Response({"error": "Live location not available"}, status=status.HTTP_404_NOT_FOUND)
+            
+        return Response({
+            "lat": bus.current_lat,
+            "lng": bus.current_lng,
+            "last_updated": bus.last_updated_location
+        })
+    except Route.DoesNotExist:
+        return Response({"error": "Route not found"}, status=status.HTTP_404_NOT_FOUND)

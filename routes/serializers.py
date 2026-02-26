@@ -6,10 +6,12 @@ logger = logging.getLogger(__name__)
 
 class RouteStopSerializer(serializers.ModelSerializer):
     location_name = serializers.CharField(source='location.name', read_only=True)
+    lat = serializers.DecimalField(source='location.latitude', max_digits=12, decimal_places=8, read_only=True)
+    lng = serializers.DecimalField(source='location.longitude', max_digits=12, decimal_places=8, read_only=True)
     
     class Meta:
         model = RouteStop
-        fields = ['stop_number', 'location_name']
+        fields = ['stop_number', 'location_name', 'lat', 'lng']
 
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,10 +29,35 @@ class RouteSerializer(serializers.ModelSerializer):
     # --- OPTIMIZATION: Get Status Directly ---
     is_booking_open = serializers.BooleanField(source='bus.is_booking_open', read_only=True)
     effective_status = serializers.ReadOnlyField()
+    
+    start_lat = serializers.SerializerMethodField()
+    start_lng = serializers.SerializerMethodField()
+    end_lat = serializers.SerializerMethodField()
+    end_lng = serializers.SerializerMethodField()
 
     class Meta:
         model = Route
-        fields = ['id', 'bus_name', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open', 'effective_status', 'start_location_data', 'end_location_data']
+        fields = ['id', 'bus_name', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open', 'effective_status', 'start_location_data', 'end_location_data', 'start_lat', 'start_lng', 'end_lat', 'end_lng']
+
+    def get_start_lat(self, obj):
+        from .models import Location
+        loc = Location.objects.filter(name=obj.start_location).first()
+        return loc.latitude if loc else None
+
+    def get_start_lng(self, obj):
+        from .models import Location
+        loc = Location.objects.filter(name=obj.start_location).first()
+        return loc.longitude if loc else None
+
+    def get_end_lat(self, obj):
+        from .models import Location
+        loc = Location.objects.filter(name=obj.end_location).first()
+        return loc.latitude if loc else None
+
+    def get_end_lng(self, obj):
+        from .models import Location
+        loc = Location.objects.filter(name=obj.end_location).first()
+        return loc.longitude if loc else None
 
     def create(self, validated_data):
         trips_data = validated_data.pop('trips')
