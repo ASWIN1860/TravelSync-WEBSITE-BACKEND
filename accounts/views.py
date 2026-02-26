@@ -12,6 +12,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils import timezone
 from .tokens import custom_token_generator # <--- CRITICAL IMPORT
 
 logger = logging.getLogger(__name__)
@@ -225,3 +226,27 @@ def reset_password_confirm(request):
 # ==========================================
 # 4. REMOVED NOTIFICATIONS
 # ==========================================
+
+# ==========================================
+# 5. LIVE TRACKING
+# ==========================================
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_location(request):
+    try:
+        bus = BusDetails.objects.get(user=request.user)
+        lat = request.data.get('lat')
+        lng = request.data.get('lng')
+        
+        if lat is None or lng is None:
+            return Response({"error": "Latitude and longitude required"}, status=status.HTTP_400_BAD_REQUEST)
+            
+        bus.current_lat = lat
+        bus.current_lng = lng
+        bus.last_updated_location = timezone.now()
+        bus.save()
+        
+        return Response({"message": "Location updated successfully", "lat": lat, "lng": lng})
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Bus profile not found"}, status=status.HTTP_404_NOT_FOUND)

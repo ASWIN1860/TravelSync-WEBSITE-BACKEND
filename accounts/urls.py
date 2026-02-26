@@ -16,6 +16,7 @@ urlpatterns = [
     path('profile/', views.get_bus_profile, name='get_bus_profile'),
     path('update-upi/', views.update_upi, name='update_upi'),
     path('toggle-status/', views.toggle_booking_status, name='toggle_booking_status'),
+    path('update-location/', views.update_location, name='update_location'),
     path('forgot-password/', views.forgot_password_request, name='forgot-password'),
     path('reset-password-confirm/', views.reset_password_confirm, name='reset-password-confirm'),
     

@@ -19,5 +19,10 @@ class BusDetails(models.Model):
 
     is_booking_open = models.BooleanField(default=False)
 
+    # --- NEW FIELDS FOR LIVE TRACKING ---
+    current_lat = models.DecimalField(max_digits=12, decimal_places=8, null=True, blank=True)
+    current_lng = models.DecimalField(max_digits=12, decimal_places=8, null=True, blank=True)
+    last_updated_location = models.DateTimeField(null=True, blank=True)
+
     def __str__(self):
         return f"{self.bus_name} ({self.user.username})"
