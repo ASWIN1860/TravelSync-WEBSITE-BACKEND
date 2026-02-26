@@ -18,7 +18,9 @@ class TripSerializer(serializers.ModelSerializer):
 
 class RouteSerializer(serializers.ModelSerializer):
     trips = TripSerializer(many=True)
-    stops = serializers.ListField(child=serializers.CharField(), write_only=True, required=False)
+    stops = serializers.ListField(child=serializers.DictField(), write_only=True, required=False)
+    start_location_data = serializers.DictField(write_only=True, required=False)
+    end_location_data = serializers.DictField(write_only=True, required=False)
     stop_list = RouteStopSerializer(source='stops', many=True, read_only=True)
     bus_name = serializers.CharField(source='bus.bus_name', read_only=True)
     
@@ -28,11 +30,13 @@ class RouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = ['id', 'bus_name', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open', 'effective_status']
+        fields = ['id', 'bus_name', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open', 'effective_status', 'start_location_data', 'end_location_data']
 
     def create(self, validated_data):
         trips_data = validated_data.pop('trips')
         stops_data = validated_data.pop('stops', []) 
+        start_loc_data = validated_data.pop('start_location_data', {})
+        end_loc_data = validated_data.pop('end_location_data', {})
         
         start_name = validated_data.get('start_location')
         end_name = validated_data.get('end_location')
@@ -41,7 +45,20 @@ class RouteSerializer(serializers.ModelSerializer):
         # 1. Ensure Start/End Locations exist in DB (for search ability)
         from .models import Location, RouteTemplate, TemplateStop 
         start_loc_obj, _ = Location.objects.get_or_create(name=start_name)
+        if start_loc_data:
+            start_loc_obj.latitude = start_loc_data.get('lat', start_loc_obj.latitude)
+            start_loc_obj.longitude = start_loc_data.get('lon', start_loc_obj.longitude)
+            start_loc_obj.district = start_loc_data.get('district', start_loc_obj.district)
+            start_loc_obj.state = start_loc_data.get('state', start_loc_obj.state)
+            start_loc_obj.save()
+
         end_loc_obj, _ = Location.objects.get_or_create(name=end_name)
+        if end_loc_data:
+            end_loc_obj.latitude = end_loc_data.get('lat', end_loc_obj.latitude)
+            end_loc_obj.longitude = end_loc_data.get('lon', end_loc_obj.longitude)
+            end_loc_obj.district = end_loc_data.get('district', end_loc_obj.district)
+            end_loc_obj.state = end_loc_data.get('state', end_loc_obj.state)
+            end_loc_obj.save()
 
         # Log the action (Info Level)
         logger.info(f"Creating Route: {start_name} -> {end_name} (Via: {via_name})")
@@ -100,9 +117,17 @@ class RouteSerializer(serializers.ModelSerializer):
                 )
                 
                 if stops_data:
-                    for index, stop_name in enumerate(stops_data):
+                    for index, stop_info in enumerate(stops_data):
                         # Get/Create Location for Stop
+                        stop_name = stop_info.get('name')
+                        if not stop_name: continue
                         loc_obj, _ = Location.objects.get_or_create(name=stop_name)
+                        
+                        loc_obj.latitude = stop_info.get('lat', loc_obj.latitude)
+                        loc_obj.longitude = stop_info.get('lon', loc_obj.longitude)
+                        loc_obj.district = stop_info.get('district', loc_obj.district)
+                        loc_obj.state = stop_info.get('state', loc_obj.state)
+                        loc_obj.save()
                         
                         # Create RouteStop (For this specific bus route)
                         RouteStop.objects.create(route=route, location=loc_obj, stop_number=index + 1)
