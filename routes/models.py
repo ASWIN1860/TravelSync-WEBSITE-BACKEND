@@ -3,6 +3,10 @@ from accounts.models import BusDetails
 
 class Location(models.Model):
     name = models.CharField(max_length=100, unique=True) # unique=True 
+    latitude = models.DecimalField(max_digits=12, decimal_places=8, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=12, decimal_places=8, null=True, blank=True)
+    district = models.CharField(max_length=100, null=True, blank=True)
+    state = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.name
