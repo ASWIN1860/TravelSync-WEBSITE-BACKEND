@@ -6,7 +6,13 @@ class BusDetails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='bus_details')
     bus_name = models.CharField(max_length=100)
     reg_number = models.CharField(max_length=50)
-    
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='approved')
+
     # --- NEW FIELDS FOR PAYMENTS ---
     # Stores the bus type (e.g., "AC", "Non-AC") - Optional but good for UI
     bus_type = models.CharField(max_length=50, default="Standard", blank=True) 
