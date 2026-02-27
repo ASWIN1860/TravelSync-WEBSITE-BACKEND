@@ -52,6 +52,9 @@ class BusRegisterSerializer(serializers.ModelSerializer):
         fields = ['username', 'email', 'password', 'bus_name', 'reg_number']
 
     def create(self, validated_data):
+        # Extract status if provided, otherwise default to model's default
+        status_val = validated_data.get('status', 'pending')
+        
         with transaction.atomic():
             user = User.objects.create_user(
                 username=validated_data['username'],
@@ -62,7 +65,8 @@ class BusRegisterSerializer(serializers.ModelSerializer):
             bus_details = BusDetails.objects.create(
                 user=user,
                 bus_name=validated_data['bus_name'],
-                reg_number=validated_data['reg_number']
+                reg_number=validated_data['reg_number'],
+                status=status_val
             )
             return bus_details
         

@@ -39,7 +39,7 @@ class RegisterView(generics.CreateAPIView):
 def register_bus_view(request):
     serializer = BusRegisterSerializer(data=request.data)
     if serializer.is_valid():
-        bus_details = serializer.save()
+        bus_details = serializer.save(status='pending')
         user = bus_details.user
         token, created = Token.objects.get_or_create(user=user)
         return Response({
@@ -100,7 +100,16 @@ def login_view(request):
                 role = "admin"
             else:
                 is_bus_operator = hasattr(user, 'bus_details') 
-                role = "bus" if is_bus_operator else "user"
+                if is_bus_operator:
+                    if user.bus_details.status == 'pending':
+                        logger.warning(f"Login Failed: Bus Account Pending - {email}")
+                        return Response({"error": "Your bus operator account is pending admin approval."}, status=status.HTTP_403_FORBIDDEN)
+                    if user.bus_details.status == 'rejected':
+                        logger.warning(f"Login Failed: Bus Account Rejected - {email}")
+                        return Response({"error": "Your bus operator account registration was rejected."}, status=status.HTTP_403_FORBIDDEN)
+                    role = "bus"
+                else:
+                    role = "user"
 
             logger.info(f"Login Success: {user.username} ({role})")
             return Response({
