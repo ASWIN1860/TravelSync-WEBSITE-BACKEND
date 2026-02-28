@@ -67,12 +67,22 @@ def get_rag_response(user_query):
 
     context_text = " ".join([item[0] for item in similarities[:3]])
 
+    # instruction_prompt = (
+    #     "You are TravelSync AI assistant. "
+    #     "Answer strictly based on the provided context .some bus guide "
+    #     " Use only the following pieces of context to answer  the question about bus travel only"
+    #     "If answer not in context, say you don't know.\n\n"
+    #     f"Context:\n{context_text}"
+    # )
+
     instruction_prompt = (
-        "You are TravelSync AI assistant. "
-        "Answer strictly based on the provided context. "
-        "If answer not in context, say you don't know.\n\n"
-        f"Context:\n{context_text}"
-    )
+    "You are TravelSync AI Assistant.\n"
+    "Answer strictly based only on the provided context about bus travel.\n"
+    "Do not create new information.\n"
+    "If the answer is not present in the context, respond with:\n"
+    "'The requested information is currently not available in the provided context.'\n\n"
+    f"Context:\n{context_text}"
+)
 
     response = ollama.chat(
         model=LANGUAGE_MODEL,
