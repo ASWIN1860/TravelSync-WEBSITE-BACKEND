@@ -11,12 +11,12 @@ from accounts.models import BusDetails
 import random
 import string
 from decimal import Decimal
+from decouple import config
+import razorpay
 
-# --- 1. CONFIGURATION ---
-# We are hardcoding these temporarily to fix your "Authentication Failed" error.
-# If these are your OLD keys and they are blocked, generate NEW ones in Razorpay Dashboard and paste here.
-RAZORPAY_KEY_ID = 'rzp_test_SBBD36grpi2lzh' 
-RAZORPAY_KEY_SECRET = 'RLS4RcRH1gAUCnML8GwCbjTr'
+
+RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = config('RAZORPAY_KEY_SECRET')
 
 client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
 
