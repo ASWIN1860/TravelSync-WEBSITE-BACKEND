@@ -111,8 +111,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-CORS_ALLOW_ALL_ORIGINS = True # For development only
-
+CORS_ALLOWED_ORIGINS = [
+    "https://travel-sync-website-hsng.vercel.app",
+    "http://localhost:5173", # Keep local access for development
+    "http://127.0.0.1:5173",
+]
 
 
 REST_FRAMEWORK = {
