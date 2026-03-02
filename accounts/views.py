@@ -210,8 +210,8 @@ def forgot_password_request(request):
     print("="*50 + "\n")
     # =====================================================
 
-    reset_link = f"http://localhost:5173/reset-password/{uidb64}/{token}"
-    
+    frontend_url = "https://travel-sync-website-hsng.vercel.app"
+    reset_link = f"{frontend_url}/reset-password/{uidb64}/{token}"    
     # Send Email
     subject = "Reset your TravelSync Password"
     message = f"Hi {user.username},\n\nClick the link below to reset your password:\n{reset_link}"
