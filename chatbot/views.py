@@ -46,3 +46,4 @@ class ChatAPIView(APIView):
                 {"error": "Server error", "details": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+        # ............................
