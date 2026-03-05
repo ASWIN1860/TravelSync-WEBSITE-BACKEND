@@ -13,6 +13,7 @@ class Booking(models.Model):
     from_loc = models.CharField(max_length=100)
     to_loc = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    passenger_count = models.IntegerField(default=1)
     is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 

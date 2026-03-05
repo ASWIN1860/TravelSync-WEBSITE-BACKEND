@@ -59,6 +59,7 @@ def verify_payment(request):
     from_loc = data.get('from')
     to_loc = data.get('to')
     price = data.get('price')
+    passenger_count = data.get('passenger_count', 1)
 
     params_dict = {
         'razorpay_order_id': razorpay_order_id,
@@ -85,6 +86,7 @@ def verify_payment(request):
             from_loc=from_loc,
             to_loc=to_loc,
             price=price,
+            passenger_count=passenger_count,
             is_verified=False 
         )
 
@@ -93,6 +95,7 @@ def verify_payment(request):
             "bus_name": booking.bus.bus_name,
             "from": booking.from_loc,
             "to": booking.to_loc,
+            "passenger_count": booking.passenger_count,
             "date": booking.created_at.strftime("%Y-%m-%d %H:%M")
         }, status=status.HTTP_201_CREATED)
 
@@ -155,6 +158,7 @@ def get_user_tickets(request):
                 "from_loc": booking.from_loc,
                 "to_loc": booking.to_loc,
                 "price": str(booking.price),
+                "passenger_count": booking.passenger_count,
                 "date": booking.created_at.strftime("%Y-%m-%d %H:%M"),
                 "is_verified": booking.is_verified
             })
