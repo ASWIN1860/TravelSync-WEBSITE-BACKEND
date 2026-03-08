@@ -12,5 +12,10 @@ urlpatterns = [
     path('toggle-favorite/', views.toggle_favorite, name='toggle_favorite'),
     path('my-favorites/', views.my_favorites, name='my_favorites'),
     path('notify/', views.set_route_notification, name='set_route_notification'),
-    path('live-location/<int:route_id>/', views.get_live_location, name='get_live_location'),
+
+
+         # 🚍 LIVE BUS SYSTEM
+    path('bus/update-location/', views.update_bus_location, name='update_bus_location'),
+    path('bus/live/<int:route_id>/', views.get_live_bus_data, name='get_live_bus_data'),
+
 ]
