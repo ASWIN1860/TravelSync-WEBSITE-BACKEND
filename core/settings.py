@@ -112,7 +112,10 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 CORS_ALLOWED_ORIGINS = [
-    "https://travel-sync-website-hsng.vercel.app",
+    "https://travelzync.com",
+    "https://www.travelzync.com",
+    "http://travelzync.com",
+    "http://www.travelzync.com",
     "http://localhost:5173", # Keep local access for development
     "http://127.0.0.1:5173",
 ]
@@ -120,7 +123,10 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://travel-sync-website-hsng.vercel.app",
+    "https://travelzync.com",
+    "https://www.travelzync.com",
+    "http://travelzync.com",
+    "http://www.travelzync.com",
 ]
 
 REST_FRAMEWORK = {
