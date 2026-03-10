@@ -108,3 +108,18 @@ class RouteNotification(models.Model):
 
     def __str__(self):
         return f"{self.user.username} notify {self.notify_minutes}m before {self.stop_name} on {self.route.id}"
+
+
+
+
+# =================eta=============
+
+class BusLiveLocation(models.Model):
+    bus = models.OneToOneField(BusDetails, on_delete=models.CASCADE, related_name="live_location")
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    speed = models.FloatField(null=True, blank=True)
+    heading = models.FloatField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+# =================================

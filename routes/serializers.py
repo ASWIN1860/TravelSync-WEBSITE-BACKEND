@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Route, Trip, RouteStop, RouteTemplate
+from .models import Route, Trip, RouteStop, RouteTemplate,BusLiveLocation
 import logging
 
 logger = logging.getLogger(__name__)
@@ -165,3 +165,12 @@ class RouteSerializer(serializers.ModelSerializer):
                 logger.info(f"Created new RouteTemplate ID {new_template.id} with {len(stops_data)} stops.")
 
         return route
+
+
+# =================eta=============
+class BusLiveLocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusLiveLocation
+        fields = ['bus', 'latitude', 'longitude', 'speed', 'updated_at']
+        read_only_fields = ['updated_at']
+# =================================

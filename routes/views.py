@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
 
-from .models import Route, Location, RouteTemplate, FavoriteRoute, RouteNotification
+from .models import Route, Location, RouteTemplate, FavoriteRoute, RouteNotification,RouteStop,BusLiveLocation
 from accounts.models import BusDetails
-from .serializers import RouteSerializer
+from .serializers import RouteSerializer,BusLiveLocationSerializer
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -246,20 +246,96 @@ def set_route_notification(request):
     except ValueError:
         return Response({"error": "Invalid notify_minutes value"}, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+# =================eta=============
+# =================================
+
+def haversine(lat1, lon1, lat2, lon2):
+    R = 6371  # Earth radius in km
+
+    dlat = radians(lat2 - lat1)
+    dlon = radians(lon2 - lon1)
+
+    a = sin(dlat/2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon/2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1-a))
+
+    return R * c
+
+# ------------
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_bus_location(request):
+
+    try:
+        bus = BusDetails.objects.get(user=request.user)
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Bus not found"}, status=404)
+
+    latitude = request.data.get("latitude")
+    longitude = request.data.get("longitude")
+    speed = request.data.get("speed", 30)
+
+    if not latitude or not longitude:
+        return Response({"error": "latitude and longitude required"}, status=400)
+
+    obj, created = BusLiveLocation.objects.update_or_create(
+        bus=bus,
+        defaults={
+            "latitude": latitude,
+            "longitude": longitude,
+            "speed": speed
+        }
+    )
+
+    return Response({"message": "Location updated"})
+
+# -----------
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_live_location(request, route_id):
+def get_live_bus_data(request, route_id):
+
     try:
-        route = Route.objects.select_related('bus').get(id=route_id)
-        bus = route.bus
-        
-        if not bus.current_lat or not bus.current_lng:
-            return Response({"error": "Live location not available"}, status=status.HTTP_404_NOT_FOUND)
-            
-        return Response({
-            "lat": bus.current_lat,
-            "lng": bus.current_lng,
-            "last_updated": bus.last_updated_location
+        route = Route.objects.get(id=route_id)
+        live = BusLiveLocation.objects.get(bus=route.bus)
+    except:
+        return Response({"error": "Live bus not available"}, status=404)
+
+    stops = RouteStop.objects.filter(route=route).select_related('location')
+
+    bus_lat = live.latitude
+    bus_lng = live.longitude
+    speed = live.speed or 30
+
+    stop_data = []
+
+    for stop in stops:
+
+        # IMPORTANT
+        # For now we simulate stop GPS
+        # later we can store GPS for each stop
+        stop_lat = bus_lat + (stop.stop_number * 0.002)
+        stop_lng = bus_lng + (stop.stop_number * 0.002)
+
+        distance = haversine(bus_lat, bus_lng, stop_lat, stop_lng)
+
+        eta = (distance / speed) * 60  # minutes
+
+        stop_data.append({
+            "stop_name": stop.location.name,
+            "stop_number": stop.stop_number,
+            "eta_minutes": round(eta)
         })
-    except Route.DoesNotExist:
-        return Response({"error": "Route not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    return Response({
+        "bus_location": {
+            "lat": bus_lat,
+            "lng": bus_lng
+        },
+        "stops": stop_data
+    })
+
+# =================eta=============
+# =================================
