@@ -12,6 +12,9 @@ class BusDetails(models.Model):
         ('rejected', 'Rejected'),
     )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='approved')
+    
+    phone_number = models.CharField(max_length=15, unique=True, null=True, blank=True)  
+
 
     # --- NEW FIELDS FOR PAYMENTS ---
     # Stores the bus type (e.g., "AC", "Non-AC") - Optional but good for UI

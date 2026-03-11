@@ -18,5 +18,8 @@ urlpatterns = [
     path('toggle-status/', views.toggle_booking_status, name='toggle_booking_status'),
     path('forgot-password/', views.forgot_password_request, name='forgot-password'),
     path('reset-password-confirm/', views.reset_password_confirm, name='reset-password-confirm'),
+
+    path('send-otp/', views.send_email_otp, name='send_email_otp'),
+    path('verify-otp/', views.verify_email_otp, name='verify_email_otp'),
     
 ]

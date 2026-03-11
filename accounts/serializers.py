@@ -46,10 +46,11 @@ class BusRegisterSerializer(serializers.ModelSerializer):
     reg_number = serializers.CharField(
         validators=[UniqueValidator(queryset=BusDetails.objects.all())]
     )
+    phone_number = serializers.CharField(required=True)
 
     class Meta:
         model = BusDetails
-        fields = ['username', 'email', 'password', 'bus_name', 'reg_number']
+        fields = ['username', 'email', 'password', 'bus_name', 'reg_number','phone_number']
 
     def create(self, validated_data):
         # Extract status if provided, otherwise default to model's default
@@ -66,6 +67,7 @@ class BusRegisterSerializer(serializers.ModelSerializer):
                 user=user,
                 bus_name=validated_data['bus_name'],
                 reg_number=validated_data['reg_number'],
+                phone_number=validated_data['phone_number'],
                 status=status_val
             )
             return bus_details

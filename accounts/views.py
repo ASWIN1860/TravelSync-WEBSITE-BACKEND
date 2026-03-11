@@ -14,8 +14,58 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
 from .tokens import custom_token_generator # <--- CRITICAL IMPORT
+import random
+
 
 logger = logging.getLogger(__name__)
+
+
+OTP_STORE = {}
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def send_email_otp(request):
+    email = request.data.get('email')
+
+    if not email:
+        return Response({"error": "Email required"}, status=400)
+
+    # generate 6 digit otp
+    otp = str(random.randint(100000, 999999))
+
+    # store otp
+    OTP_STORE[email] = otp
+
+    subject = "TravelZync Email Verification OTP"
+    message = f"Your TravelZync OTP is: {otp}\n\nThis OTP will be used to verify your email."
+
+    try:
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [email],
+            fail_silently=False,
+        )
+
+        return Response({"message": "OTP sent to email"})
+    except Exception as e:
+        print("EMAIL ERROR:", e)
+        return Response({"error": "Failed to send OTP"}, status=500)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_email_otp(request):
+    email = request.data.get("email")
+    otp = request.data.get("otp")
+
+    stored_otp = OTP_STORE.get(email)
+
+    if stored_otp and stored_otp == otp:
+        return Response({"verified": True})
+
+    return Response({"verified": False, "error": "Invalid OTP"}, status=400)
 
 # ==========================================
 # 1. AUTHENTICATION (Register/Login)
@@ -50,7 +100,6 @@ def register_bus_view(request):
         }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -70,6 +119,12 @@ def check_availability(request):
     if reg_number:
         is_taken = BusDetails.objects.filter(reg_number__iexact=reg_number).exists()
         return Response({'available': not is_taken, 'field': 'reg_number'})
+
+
+    phone = request.query_params.get('phone')
+    if phone:
+        is_taken = BusDetails.objects.filter(phone_number=phone).exists()
+        return Response({'available': not is_taken, 'field': 'phone'})
         
     return Response({'error': 'Missing query param'}, status=status.HTTP_400_BAD_REQUEST)
 
