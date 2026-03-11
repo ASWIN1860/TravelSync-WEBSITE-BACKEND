@@ -1,13 +1,12 @@
 import os
 from groq import Groq
 from django.conf import settings
-from dotenv import load_dotenv
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 
-load_dotenv()  # this loads the .env file
-
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-
-client = Groq(api_key=GROQ_API_KEY)
+if GROQ_API_KEY:
+    client = Groq(api_key=GROQ_API_KEY)
+else:
+    client = None
 
 LANGUAGE_MODEL = "llama-3.1-8b-instant"
 
@@ -53,13 +52,20 @@ def get_rag_response(user_query):
         f"User Question: {user_query}"
     )
 
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": instruction_prompt},
-            {"role": "user", "content": user_query}
-        ],
-        model=LANGUAGE_MODEL,
-        temperature=0.2,
-    )
+    if not client:
+        return "Sorry, my AI brain is not configured right now. Please check the API key."
 
-    return chat_completion.choices[0].message.content
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": instruction_prompt},
+                {"role": "user", "content": user_query}
+            ],
+            model=LANGUAGE_MODEL,
+            temperature=0.2,
+        )
+        return chat_completion.choices[0].message.content
+        
+    except Exception as e:
+        print(f"Groq API Error: {e}")
+        return "Sorry, I am having trouble connecting to my AI brain right now."
