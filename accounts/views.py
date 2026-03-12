@@ -51,7 +51,7 @@ def send_email_otp(request):
         return Response({"message": "OTP sent to email"})
     except Exception as e:
         print("EMAIL ERROR:", e)
-        return Response({"error": "Failed to send OTP"}, status=500)
+        return Response({"error": f"Failed to send OTP: {str(e)}"}, status=500)
 
 
 @api_view(['POST'])
