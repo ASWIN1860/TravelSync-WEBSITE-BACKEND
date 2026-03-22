@@ -22,4 +22,7 @@ urlpatterns = [
     path('send-otp/', views.send_email_otp, name='send_email_otp'),
     path('verify-otp/', views.verify_email_otp, name='verify_email_otp'),
     
+    # Wallet Enpoints
+    path('wallet/', views.get_wallet_balance, name='get_wallet_balance'),
+    path('wallet/verify-add-funds/', views.verify_add_funds, name='verify_add_funds'),
 ]

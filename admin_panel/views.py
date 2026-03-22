@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
-from accounts.models import BusDetails
+from accounts.models import BusDetails, WithdrawalRequest
 from routes.models import Route, Location, RouteTemplate
 from bookings.models import Booking
 from django.core.mail import send_mail
@@ -12,7 +12,8 @@ from .serializers import (
     LocationAdminSerializer,
     RouteAdminSerializer,
     RouteTemplateAdminSerializer,
-    BookingAdminSerializer
+    BookingAdminSerializer,
+    WithdrawalRequestAdminSerializer
 )
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -62,3 +63,23 @@ class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all().order_by('-created_at')
     serializer_class = BookingAdminSerializer
     permission_classes = [IsAdminUser]
+
+class WithdrawalRequestViewSet(viewsets.ModelViewSet):
+    queryset = WithdrawalRequest.objects.all().order_by('-created_at')
+    serializer_class = WithdrawalRequestAdminSerializer
+    permission_classes = [IsAdminUser]
+
+    def perform_update(self, serializer):
+        instance = self.get_object()
+        old_status = instance.status
+        updated_instance = serializer.save()
+
+        # If Admin REJECTS, refund the TC back to the operator
+        if old_status == 'pending' and updated_instance.status == 'rejected':
+            from django.db.models import F
+            try:
+                bus = BusDetails.objects.get(user=updated_instance.user)
+                bus.total_earnings = F('total_earnings') + updated_instance.amount
+                bus.save()
+            except BusDetails.DoesNotExist:
+                pass

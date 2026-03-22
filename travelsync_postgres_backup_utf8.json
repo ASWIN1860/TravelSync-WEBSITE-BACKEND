@@ -1,0 +1,2821 @@
+﻿[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$UMLxOkFT3Tr0PiOzVhr41y$Jr5KdoKNQ/y/2cKvjbV2stHB/AfTHYjRqYFXs89BE2Q=",
+        "last_login": "2026-03-01T19:45:29.015Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "travelzynclabs@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-03-01T19:41:57.480Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$HZknwmw4SuyugNnJ4zffLT$HTAlSO9aH0qbecZhGbhqXI2mzPa/nMOT3ntWyROehfc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "developer",
+        "first_name": "",
+        "last_name": "",
+        "email": "muhammedashkartkiam@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-01T20:37:15.993Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$TUnQLPZyv0zrnUn18hMi3j$Z3ICs3zmEKsLsB5Loq5A45KGaVr+l6p1JDfyTh/fAPU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "razal",
+        "first_name": "",
+        "last_name": "",
+        "email": "razalrahman54@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-01T20:41:22.652Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$uGSMzs2wawQj2zJ2JSz0Ds$rKIs7rNItnchaTvlDcvbiaR5mDt9objBZdflOVbjQJ8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Aswin1860",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin3577@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T02:31:31.629Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$XDbW7jVeWlecXXa5DjwIjG$1XJDr2+9jcCENetHc4r93fYdVtrQk9BooARJBUm1A18=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Aswin9495",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin3578@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T02:35:57.099Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$30Fc63GtW9z9JoF901GFr5$ZgNFvsIEYzckvJf9BHITSIBBU3mpYPi/PjebfT8m+OY=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user1",
+        "first_name": "",
+        "last_name": "",
+        "email": "sruthickhp@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T05:38:06.416Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$kNoe4fBlZ5su1jWkHis6ak$a97iovjYNaGWlXTtJCgYZ3V2S593FZUpIkNx4McXiUM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Binu",
+        "first_name": "",
+        "last_name": "",
+        "email": "binulal@binu.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T05:39:44.024Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$ylsZLzDS3eqdZaiMHKd5Jx$2bmB+cEHDGEIVXwEKIczYa5jSTUb41i08AsW+WK2GUc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "soorya",
+        "first_name": "",
+        "last_name": "",
+        "email": "sruthick@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T06:27:26.809Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$zHpK8SgSBg21d8emxIDaxK$yKTfyiapcwrIgRj6PDQXODT0MTd4vVUGdN3wb6IfM0k=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Adam",
+        "first_name": "",
+        "last_name": "",
+        "email": "Anu4587@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T06:34:17.105Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$eiHHxqiMHG71pIorfBckOH$7fuG8FyzjTTSwENoX7Ls5rTK0WtOxmLKNXyUA+l2U5U=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "dhilshad",
+        "first_name": "",
+        "last_name": "",
+        "email": "dhilshadmuhammed8@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T18:00:13.102Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$Ra74yxFkovHMNwek1aqafu$qiSmO0ghOhiq2D3qQ6sMVqpPAa1+/DBbmSvZQkZBvHM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "test",
+        "first_name": "",
+        "last_name": "",
+        "email": "edhilshad@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-02T19:06:48.064Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$oItU4rh0gvEW7x8gpD9dgH$jp9+MLZ4Ms6k0WD1YNVKTXAFn8CbVWTZNI4wGTjJHMY=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Tester",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin3579@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T04:30:09.008Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$bSbkRP7RSqyVwvKW296avq$NXzfjyRQ0hlyGZ3nK6uPK6s9tmnLNitXXij+iTLYBHs=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Bustester",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin3580@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T05:11:44.518Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$kevMt49ExLxMsXM09K4HB4$3ezLVvDLFhGedivjEF6DpROzLWL1ZixyRn0OaVX+W3g=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Bus1",
+        "first_name": "",
+        "last_name": "",
+        "email": "bilsajbus@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T07:33:16.490Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$ufJ3iKk632czuwB8pItg4j$T5qkNHNT62ZLgcQ8AVEcjZQTXYpgoZ1Dtzp23wvRS+Q=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "bustesterA",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin3581@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T07:43:36.285Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$r3jqy1NvuvQElUTVe2lvYQ$bWqVRA0O7HUrKUc1NNt3kSMqmjrWZXmLzR2UgsX0Hl8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "bustesterB",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin3582@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T07:45:07.063Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$OPZGene4WHcEHHYZUqj9FA$Lg6zd2CvC182EXyKDfmLG+8LNIxrhaVwAJ1PEHYoqjQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Bus2",
+        "first_name": "",
+        "last_name": "",
+        "email": "snehithanbus@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T07:46:00.714Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$9gL3QUoL3N8vDpKp0Ektzf$PEYzsRcTVgK0DXfk0L+WYd+kdnrMSuWxt4aMhLB+c8U=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Sinansv",
+        "first_name": "",
+        "last_name": "",
+        "email": "muhammedsinansvwork@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T09:06:59.119Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$TZIZ6hWkTPftI6pLALSlHc$sp1JVX6lbt31p5LAa8VVcutXUIac2uBTGwN+VL/wcAU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "dhilshadxxx",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin35@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T11:07:58.684Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$QOh7qz9BDEJJWobLcdHDD6$s9qxN5iwHUQJHPGscNGQBa5NxHVcT9+L4cnMWum7lDE=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "testerAB",
+        "first_name": "",
+        "last_name": "",
+        "email": "aswin3587@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-03T11:22:02.246Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$gFEaLaE4WbMOImyzZD7xiM$B1GP3o/EPfqMVXf8fU009m6tap48pHXhysaXqltfae0=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Abhinav",
+        "first_name": "",
+        "last_name": "",
+        "email": "abhinavabhi1011@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-04T05:42:56.562Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$1xljGDP8Z2BWyIspCKBYNm$hLAxK7QeZp68mcDbE8Ki5OaFHNalkwErCEHkDf0Kwm8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "bilsaj",
+        "first_name": "",
+        "last_name": "",
+        "email": "bilsaj@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-08T10:14:08.358Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$wrMHUImMPFRKbqj9zBOEDI$gSxORieIgfa5ah+S1F1PoEjGmQ+F8wCdcoTk+J0FZCI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "mayavi",
+        "first_name": "",
+        "last_name": "",
+        "email": "mayavi@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-08T11:31:28.126Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "gp84mec6urootzip7xleq7nyltqkukz3",
+    "fields": {
+        "session_data": ".eJxVjM0OwiAQhN-FsyG7VH7i0bvPQBYWpGogKe3J-O7SpAc9znzfzFt42tbit54WP7O4CBSn3y5QfKa6A35QvTcZW12XOchdkQft8tY4va6H-3dQqJexBiJS0U04WUwTaOQI2urM2mWNFnM2Bq3NrLQ9AyuTB2IADCOzM-LzBc3XNzo:1vwmjJ:Ho_47Kjr6hcy-rw9hGUlpKXmxAxRsshU6gsHqCTvWZg",
+        "expire_date": "2026-03-15T19:45:29.020Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "us095njldbho5z94gtyh1qv688336p2c",
+    "fields": {
+        "session_data": ".eJxVjM0OwiAQhN-FsyG7VH7i0bvPQBYWpGogKe3J-O7SpAc9znzfzFt42tbit54WP7O4CBSn3y5QfKa6A35QvTcZW12XOchdkQft8tY4va6H-3dQqJexBiJS0U04WUwTaOQI2urM2mWNFnM2Bq3NrLQ9AyuTB2IADCOzM-LzBc3XNzo:1vwmgg:xtkwYfXPOeV3_Z_6g8DM4aySL2D-wDbFgKJ0BgfN3DY",
+        "expire_date": "2026-03-15T19:42:46.076Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "059352883b8413153088b2b5fcae16671e9ae3c9",
+    "fields": {
+        "user": [
+            "soorya"
+        ],
+        "created": "2026-03-02T06:27:29.620Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "0b408987036a2ddee5905dc5864428b6f0960d56",
+    "fields": {
+        "user": [
+            "Adam"
+        ],
+        "created": "2026-03-02T06:34:20.313Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "1004dec8276bdec17a47d76de158d6ac885ccad5",
+    "fields": {
+        "user": [
+            "Sinansv"
+        ],
+        "created": "2026-03-03T09:07:01.521Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "330a83e396001ce11d3a8ef19ad1756b7692fe80",
+    "fields": {
+        "user": [
+            "dhilshad"
+        ],
+        "created": "2026-03-02T18:00:16.308Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "33921b9508a0502439c1912bab4d717be927d88b",
+    "fields": {
+        "user": [
+            "dhilshadxxx"
+        ],
+        "created": "2026-03-03T11:08:01.601Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "3497b6e2a260a7cf14b87f3cc9f14de31383f564",
+    "fields": {
+        "user": [
+            "mayavi"
+        ],
+        "created": "2026-03-08T11:31:29.981Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "379386991d8da96e5e6c3dfe43090cc4b02df629",
+    "fields": {
+        "user": [
+            "Bus1"
+        ],
+        "created": "2026-03-03T07:33:19.182Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "513dfe41b808d5942e213f02815c95057f5d28bf",
+    "fields": {
+        "user": [
+            "Bus2"
+        ],
+        "created": "2026-03-03T07:46:02.995Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "53ad3e9d8de453e0c4e694c967b1a79374a307ac",
+    "fields": {
+        "user": [
+            "bustesterB"
+        ],
+        "created": "2026-03-03T07:45:09.685Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "5b741a702f68c15cb2e152210b0aad15a1d89ed0",
+    "fields": {
+        "user": [
+            "Aswin9495"
+        ],
+        "created": "2026-03-02T02:36:00.110Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "62641dc61a7d252ab6f04e936ddfa89519edbb94",
+    "fields": {
+        "user": [
+            "developer"
+        ],
+        "created": "2026-03-01T20:37:19.188Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "6362b0b5f1affa19f5a6370d0d2af697f5a0df64",
+    "fields": {
+        "user": [
+            "razal"
+        ],
+        "created": "2026-03-01T20:41:24.995Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "760eb6eff5e0b259c0045b3c66ceb353f8fe76c9",
+    "fields": {
+        "user": [
+            "Aswin1860"
+        ],
+        "created": "2026-03-02T02:31:34.663Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "8302b8125e0afc60c79186fc69c514b9334df1c7",
+    "fields": {
+        "user": [
+            "bilsaj"
+        ],
+        "created": "2026-03-08T10:14:10.696Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "85a8ef0df90453c3e41508776e7ef5e61334b712",
+    "fields": {
+        "user": [
+            "Abhinav"
+        ],
+        "created": "2026-03-04T05:42:59.169Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "9406f94a111c6eed15927e909c9e1386c182ae96",
+    "fields": {
+        "user": [
+            "user1"
+        ],
+        "created": "2026-03-02T05:38:09.475Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "9b40bdd632be453c28c39de7bdb10ad8dd345971",
+    "fields": {
+        "user": [
+            "Binu"
+        ],
+        "created": "2026-03-02T05:39:46.565Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "9d6fde729be8d20add3b6f73b0b33fe53cc8e85a",
+    "fields": {
+        "user": [
+            "Bustester"
+        ],
+        "created": "2026-03-03T05:11:47.526Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "ca2207b88abb78de22c72c1a871be56159f5c719",
+    "fields": {
+        "user": [
+            "Tester"
+        ],
+        "created": "2026-03-03T04:30:11.397Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "cefab8c4ccedca9756c052af954cf32bf44f65d0",
+    "fields": {
+        "user": [
+            "test"
+        ],
+        "created": "2026-03-02T19:06:51.426Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "d14b22b5f20f794bffc91e9dc5d6d21d50cd6f78",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "created": "2026-03-01T20:37:38.093Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "f26a12a911068cbe330603e10256f47a9f5d511a",
+    "fields": {
+        "user": [
+            "bustesterA"
+        ],
+        "created": "2026-03-03T07:43:38.988Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "fcc08e685e58982a385c6d4ab0c7c519742a3d34",
+    "fields": {
+        "user": [
+            "testerAB"
+        ],
+        "created": "2026-03-03T11:22:04.674Z"
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "Aswin9495"
+        ],
+        "bus_name": "Travelsync",
+        "reg_number": "KL11K2345",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": "xcfsd@oksbi",
+        "total_earnings": "195.00",
+        "is_booking_open": true
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "Binu"
+        ],
+        "bus_name": "PK",
+        "reg_number": "KL11BX1994",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "80.00",
+        "is_booking_open": true
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "soorya"
+        ],
+        "bus_name": "ATHIRA",
+        "reg_number": "KL181964",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": false
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "test"
+        ],
+        "bus_name": "testbusX",
+        "reg_number": "KL57A5757",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": "Hi@hi",
+        "total_earnings": "0.00",
+        "is_booking_open": false
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 5,
+    "fields": {
+        "user": [
+            "Tester"
+        ],
+        "bus_name": "Testbus",
+        "reg_number": "KL575656",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": true
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 6,
+    "fields": {
+        "user": [
+            "Bustester"
+        ],
+        "bus_name": "PMP",
+        "reg_number": "KL115678",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": false
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 7,
+    "fields": {
+        "user": [
+            "Bus1"
+        ],
+        "bus_name": "Bilsaj",
+        "reg_number": "KL57E8106",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": false
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 8,
+    "fields": {
+        "user": [
+            "bustesterA"
+        ],
+        "bus_name": "TestbusA",
+        "reg_number": "KL126789",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": "sdsdsd@fhhg",
+        "total_earnings": "125.00",
+        "is_booking_open": true
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 9,
+    "fields": {
+        "user": [
+            "bustesterB"
+        ],
+        "bus_name": "testbusB",
+        "reg_number": "KL652345",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": true
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 10,
+    "fields": {
+        "user": [
+            "Bus2"
+        ],
+        "bus_name": "Snehithan",
+        "reg_number": "KL76A7844",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": false
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 11,
+    "fields": {
+        "user": [
+            "testerAB"
+        ],
+        "bus_name": "testbusAB",
+        "reg_number": "KL453456",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": false
+    }
+},
+{
+    "model": "accounts.busdetails",
+    "pk": 12,
+    "fields": {
+        "user": [
+            "bilsaj"
+        ],
+        "bus_name": "sns",
+        "reg_number": "KL67A5435",
+        "status": "approved",
+        "phone_number": null,
+        "bus_type": "Standard",
+        "upi_id": null,
+        "total_earnings": "0.00",
+        "is_booking_open": true
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 1,
+    "fields": {
+        "name": "Kozhikode",
+        "latitude": "11.24505580",
+        "longitude": "75.77547160",
+        "district": "Kozhikode",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 2,
+    "fields": {
+        "name": "Kannur",
+        "latitude": "11.87638360",
+        "longitude": "75.37379730",
+        "district": "Kannur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 3,
+    "fields": {
+        "name": "Payyoli",
+        "latitude": "11.51714790",
+        "longitude": "75.61858690",
+        "district": "Koyilandi",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 4,
+    "fields": {
+        "name": "Vadakara",
+        "latitude": "11.59381800",
+        "longitude": "75.58727150",
+        "district": "Vadakara",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 5,
+    "fields": {
+        "name": "Mahe",
+        "latitude": "11.70219780",
+        "longitude": "75.53647010",
+        "district": "Mahe Taluk",
+        "state": "Puducherry"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 6,
+    "fields": {
+        "name": "Ernakulam",
+        "latitude": "9.98372570",
+        "longitude": "76.27400010",
+        "district": "Kanayannur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 7,
+    "fields": {
+        "name": "Malappuram",
+        "latitude": "11.10684480",
+        "longitude": "76.10995510",
+        "district": null,
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 8,
+    "fields": {
+        "name": "Parakkad",
+        "latitude": "10.50434950",
+        "longitude": "76.16325990",
+        "district": "Thrissur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 9,
+    "fields": {
+        "name": "Koduvally",
+        "latitude": "11.35945370",
+        "longitude": "75.91198680",
+        "district": "Thamarassery",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 10,
+    "fields": {
+        "name": "Thamarassery",
+        "latitude": "11.41775200",
+        "longitude": "75.93694560",
+        "district": "Thamarassery",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 11,
+    "fields": {
+        "name": "Eranhipalam",
+        "latitude": "11.27976460",
+        "longitude": "75.78486170",
+        "district": "Kozhikode",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 12,
+    "fields": {
+        "name": "Baby Memorial Hospital",
+        "latitude": "11.25983650",
+        "longitude": "75.79233420",
+        "district": "Kozhikode",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 13,
+    "fields": {
+        "name": "Sarovaram Bio Park",
+        "latitude": "11.26804860",
+        "longitude": "75.79375330",
+        "district": "Kozhikode",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 14,
+    "fields": {
+        "name": "Medical College",
+        "latitude": "11.27691770",
+        "longitude": "75.83584890",
+        "district": "Kozhikode",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 15,
+    "fields": {
+        "name": "Nilambur",
+        "latitude": "11.28650830",
+        "longitude": "76.24073870",
+        "district": "Nilambur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 16,
+    "fields": {
+        "name": "Ramanattukara",
+        "latitude": "11.17808760",
+        "longitude": "75.86561960",
+        "district": "Kozhikode",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 17,
+    "fields": {
+        "name": "Ferok",
+        "latitude": "11.17591220",
+        "longitude": "75.83018770",
+        "district": "Kozhikode",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 18,
+    "fields": {
+        "name": "Kondotty",
+        "latitude": "11.14572030",
+        "longitude": "75.96437530",
+        "district": "Kondotty",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 19,
+    "fields": {
+        "name": "Manjeri-Kizhisseri Road",
+        "latitude": "11.16935060",
+        "longitude": "76.02217160",
+        "district": "Ernad",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 20,
+    "fields": {
+        "name": "Edavanna Wandoor Road",
+        "latitude": "11.19659950",
+        "longitude": "76.21365720",
+        "district": "Nilambur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 21,
+    "fields": {
+        "name": "Mampad",
+        "latitude": "11.24466150",
+        "longitude": "76.17936010",
+        "district": "Nilambur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 22,
+    "fields": {
+        "name": "Pookkottumpadam",
+        "latitude": "11.24399310",
+        "longitude": "76.30018250",
+        "district": "Nilambur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 23,
+    "fields": {
+        "name": "Nilambur Road Railway Station",
+        "latitude": "11.27989260",
+        "longitude": "76.25311200",
+        "district": "Nilambur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 24,
+    "fields": {
+        "name": "Koottamppara",
+        "latitude": "11.25218540",
+        "longitude": "76.26786240",
+        "district": "Nilambur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 25,
+    "fields": {
+        "name": "Kochi",
+        "latitude": "9.96790320",
+        "longitude": "76.24443780",
+        "district": "Kochi",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 26,
+    "fields": {
+        "name": "Thrissur",
+        "latitude": "10.52700990",
+        "longitude": "76.21462100",
+        "district": "Thrissur",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 27,
+    "fields": {
+        "name": "Narikkuni",
+        "latitude": "11.36706090",
+        "longitude": "75.86357660",
+        "district": "Thamarassery",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 28,
+    "fields": {
+        "name": "Kacheri Mukku",
+        "latitude": "11.35818250",
+        "longitude": "75.89836280",
+        "district": "Thamarassery",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 29,
+    "fields": {
+        "name": "Mariveetil Thazham",
+        "latitude": "11.37404800",
+        "longitude": "75.88346630",
+        "district": "Thamarassery",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 30,
+    "fields": {
+        "name": "Pannur",
+        "latitude": "11.38316180",
+        "longitude": "75.88501030",
+        "district": "Thamarassery",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.location",
+    "pk": 31,
+    "fields": {
+        "name": "Vattaparapoyil Anganavadi",
+        "latitude": "11.37018470",
+        "longitude": "75.87675830",
+        "district": "Thamarassery",
+        "state": "Kerala"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 1,
+    "fields": {
+        "bus": 2,
+        "start_location": "Kozhikode",
+        "end_location": "Kannur",
+        "via": "mahe",
+        "status": "active",
+        "status_updated_at": "2026-03-02T06:10:34.531Z",
+        "created_at": "2026-03-02T05:48:46.030Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 2,
+    "fields": {
+        "bus": 2,
+        "start_location": "Kozhikode",
+        "end_location": "Ernakulam",
+        "via": "Kannur",
+        "status": "active",
+        "status_updated_at": "2026-03-02T05:53:22.922Z",
+        "created_at": "2026-03-02T05:53:22.922Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 3,
+    "fields": {
+        "bus": 1,
+        "start_location": "Kozhikode",
+        "end_location": "Koduvally",
+        "via": "NH167",
+        "status": "active",
+        "status_updated_at": "2026-03-03T05:33:48.608Z",
+        "created_at": "2026-03-02T06:06:07.381Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 4,
+    "fields": {
+        "bus": 5,
+        "start_location": "Kozhikode",
+        "end_location": "Eranhipalam",
+        "via": "baby memorial hospital",
+        "status": "active",
+        "status_updated_at": "2026-03-03T04:40:21.722Z",
+        "created_at": "2026-03-03T04:40:21.722Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 5,
+    "fields": {
+        "bus": 6,
+        "start_location": "Koduvally",
+        "end_location": "Kozhikode",
+        "via": "NH167",
+        "status": "active",
+        "status_updated_at": "2026-03-03T05:14:43.021Z",
+        "created_at": "2026-03-03T05:14:43.021Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 6,
+    "fields": {
+        "bus": 1,
+        "start_location": "Kozhikode",
+        "end_location": "Koduvally",
+        "via": "kunnamangalam",
+        "status": "active",
+        "status_updated_at": "2026-03-03T05:18:05.233Z",
+        "created_at": "2026-03-03T05:18:05.233Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 7,
+    "fields": {
+        "bus": 1,
+        "start_location": "Kozhikode",
+        "end_location": "Koduvally",
+        "via": "medical college",
+        "status": "active",
+        "status_updated_at": "2026-03-03T05:30:14.794Z",
+        "created_at": "2026-03-03T05:30:14.794Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 8,
+    "fields": {
+        "bus": 8,
+        "start_location": "Kozhikode",
+        "end_location": "Nilambur",
+        "via": "Manjeri",
+        "status": "active",
+        "status_updated_at": "2026-03-03T11:23:59.825Z",
+        "created_at": "2026-03-03T08:01:32.054Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 9,
+    "fields": {
+        "bus": 8,
+        "start_location": "Nilambur",
+        "end_location": "Kozhikode",
+        "via": "Manjeri",
+        "status": "active",
+        "status_updated_at": "2026-03-03T08:03:15.427Z",
+        "created_at": "2026-03-03T08:03:15.427Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 10,
+    "fields": {
+        "bus": 9,
+        "start_location": "Nilambur",
+        "end_location": "Pookkottumpadam",
+        "via": "Main road",
+        "status": "active",
+        "status_updated_at": "2026-03-03T08:07:19.595Z",
+        "created_at": "2026-03-03T08:07:19.595Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 11,
+    "fields": {
+        "bus": 9,
+        "start_location": "Pookkottumpadam",
+        "end_location": "Nilambur",
+        "via": "Main road",
+        "status": "active",
+        "status_updated_at": "2026-03-03T08:08:18.941Z",
+        "created_at": "2026-03-03T08:08:18.941Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 12,
+    "fields": {
+        "bus": 8,
+        "start_location": "Kozhikode",
+        "end_location": "Kochi",
+        "via": "NH66",
+        "status": "active",
+        "status_updated_at": "2026-03-03T11:25:43.509Z",
+        "created_at": "2026-03-03T11:25:43.509Z"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 13,
+    "fields": {
+        "bus": 12,
+        "start_location": "Koduvally",
+        "end_location": "Narikkuni",
+        "via": "pannur",
+        "status": "active",
+        "status_updated_at": "2026-03-08T10:17:33.846Z",
+        "created_at": "2026-03-08T10:17:33.846Z"
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 1,
+    "fields": {
+        "route": 1,
+        "location": 3,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 2,
+    "fields": {
+        "route": 1,
+        "location": 4,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 3,
+    "fields": {
+        "route": 1,
+        "location": 5,
+        "stop_number": 3
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 4,
+    "fields": {
+        "route": 2,
+        "location": 7,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 5,
+    "fields": {
+        "route": 2,
+        "location": 8,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 6,
+    "fields": {
+        "route": 3,
+        "location": 10,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 7,
+    "fields": {
+        "route": 3,
+        "location": 11,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 8,
+    "fields": {
+        "route": 4,
+        "location": 12,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 9,
+    "fields": {
+        "route": 4,
+        "location": 13,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 10,
+    "fields": {
+        "route": 5,
+        "location": 11,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 11,
+    "fields": {
+        "route": 5,
+        "location": 10,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 12,
+    "fields": {
+        "route": 6,
+        "location": 14,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 13,
+    "fields": {
+        "route": 8,
+        "location": 16,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 14,
+    "fields": {
+        "route": 8,
+        "location": 17,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 15,
+    "fields": {
+        "route": 8,
+        "location": 18,
+        "stop_number": 3
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 16,
+    "fields": {
+        "route": 8,
+        "location": 19,
+        "stop_number": 4
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 17,
+    "fields": {
+        "route": 8,
+        "location": 20,
+        "stop_number": 5
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 18,
+    "fields": {
+        "route": 8,
+        "location": 21,
+        "stop_number": 6
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 19,
+    "fields": {
+        "route": 9,
+        "location": 21,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 20,
+    "fields": {
+        "route": 9,
+        "location": 20,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 21,
+    "fields": {
+        "route": 9,
+        "location": 19,
+        "stop_number": 3
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 22,
+    "fields": {
+        "route": 9,
+        "location": 18,
+        "stop_number": 4
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 23,
+    "fields": {
+        "route": 9,
+        "location": 17,
+        "stop_number": 5
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 24,
+    "fields": {
+        "route": 9,
+        "location": 16,
+        "stop_number": 6
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 25,
+    "fields": {
+        "route": 10,
+        "location": 23,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 26,
+    "fields": {
+        "route": 10,
+        "location": 24,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 27,
+    "fields": {
+        "route": 11,
+        "location": 24,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 28,
+    "fields": {
+        "route": 11,
+        "location": 23,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 29,
+    "fields": {
+        "route": 12,
+        "location": 26,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 30,
+    "fields": {
+        "route": 12,
+        "location": 6,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 31,
+    "fields": {
+        "route": 13,
+        "location": 28,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 32,
+    "fields": {
+        "route": 13,
+        "location": 29,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 33,
+    "fields": {
+        "route": 13,
+        "location": 30,
+        "stop_number": 3
+    }
+},
+{
+    "model": "routes.routestop",
+    "pk": 34,
+    "fields": {
+        "route": 13,
+        "location": 31,
+        "stop_number": 4
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 1,
+    "fields": {
+        "route": 1,
+        "start_time": "05:17:00",
+        "end_time": "05:17:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 2,
+    "fields": {
+        "route": 2,
+        "start_time": "10:30:00",
+        "end_time": "17:28:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 3,
+    "fields": {
+        "route": 3,
+        "start_time": "11:30:00",
+        "end_time": "14:40:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 4,
+    "fields": {
+        "route": 4,
+        "start_time": "10:30:00",
+        "end_time": "10:50:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 5,
+    "fields": {
+        "route": 5,
+        "start_time": "10:00:00",
+        "end_time": "12:05:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 6,
+    "fields": {
+        "route": 6,
+        "start_time": "09:00:00",
+        "end_time": "11:50:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 7,
+    "fields": {
+        "route": 7,
+        "start_time": "14:01:00",
+        "end_time": "16:04:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 8,
+    "fields": {
+        "route": 8,
+        "start_time": "08:30:00",
+        "end_time": "16:33:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 9,
+    "fields": {
+        "route": 9,
+        "start_time": "16:35:00",
+        "end_time": "20:35:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 10,
+    "fields": {
+        "route": 10,
+        "start_time": "15:36:00",
+        "end_time": "16:00:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 11,
+    "fields": {
+        "route": 11,
+        "start_time": "16:30:00",
+        "end_time": "17:00:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 12,
+    "fields": {
+        "route": 12,
+        "start_time": "07:56:00",
+        "end_time": "12:46:00"
+    }
+},
+{
+    "model": "routes.trip",
+    "pk": 13,
+    "fields": {
+        "route": 13,
+        "start_time": "15:50:00",
+        "end_time": "16:33:00"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 1,
+    "fields": {
+        "start_location": 1,
+        "end_location": 2,
+        "via": "mahe",
+        "created_by": [
+            "Binu"
+        ],
+        "created_at": "2026-03-02T05:48:46.049Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 2,
+    "fields": {
+        "start_location": 1,
+        "end_location": 6,
+        "via": "Kannur",
+        "created_by": [
+            "Binu"
+        ],
+        "created_at": "2026-03-02T05:53:22.933Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 3,
+    "fields": {
+        "start_location": 1,
+        "end_location": 9,
+        "via": "NH167",
+        "created_by": [
+            "Aswin9495"
+        ],
+        "created_at": "2026-03-02T06:06:07.396Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 4,
+    "fields": {
+        "start_location": 1,
+        "end_location": 11,
+        "via": "baby memorial hospital",
+        "created_by": [
+            "Tester"
+        ],
+        "created_at": "2026-03-03T04:40:21.747Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 5,
+    "fields": {
+        "start_location": 1,
+        "end_location": 9,
+        "via": "kunnamangalam",
+        "created_by": [
+            "Aswin9495"
+        ],
+        "created_at": "2026-03-03T05:18:05.302Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 6,
+    "fields": {
+        "start_location": 1,
+        "end_location": 9,
+        "via": "medical college",
+        "created_by": [
+            "Aswin9495"
+        ],
+        "created_at": "2026-03-03T05:30:14.808Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 7,
+    "fields": {
+        "start_location": 1,
+        "end_location": 15,
+        "via": "Manjeri",
+        "created_by": [
+            "bustesterA"
+        ],
+        "created_at": "2026-03-03T08:01:32.086Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 8,
+    "fields": {
+        "start_location": 15,
+        "end_location": 22,
+        "via": "Main road",
+        "created_by": [
+            "bustesterB"
+        ],
+        "created_at": "2026-03-03T08:07:19.609Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 9,
+    "fields": {
+        "start_location": 1,
+        "end_location": 25,
+        "via": "NH66",
+        "created_by": [
+            "bustesterA"
+        ],
+        "created_at": "2026-03-03T11:25:43.529Z"
+    }
+},
+{
+    "model": "routes.routetemplate",
+    "pk": 10,
+    "fields": {
+        "start_location": 9,
+        "end_location": 27,
+        "via": "pannur",
+        "created_by": [
+            "bilsaj"
+        ],
+        "created_at": "2026-03-08T10:17:33.866Z"
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 1,
+    "fields": {
+        "template": 1,
+        "location": 3,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 2,
+    "fields": {
+        "template": 1,
+        "location": 4,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 3,
+    "fields": {
+        "template": 1,
+        "location": 5,
+        "stop_number": 3
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 4,
+    "fields": {
+        "template": 2,
+        "location": 7,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 5,
+    "fields": {
+        "template": 2,
+        "location": 8,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 6,
+    "fields": {
+        "template": 3,
+        "location": 10,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 7,
+    "fields": {
+        "template": 3,
+        "location": 11,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 8,
+    "fields": {
+        "template": 4,
+        "location": 12,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 9,
+    "fields": {
+        "template": 4,
+        "location": 13,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 10,
+    "fields": {
+        "template": 5,
+        "location": 14,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 11,
+    "fields": {
+        "template": 7,
+        "location": 16,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 12,
+    "fields": {
+        "template": 7,
+        "location": 17,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 13,
+    "fields": {
+        "template": 7,
+        "location": 18,
+        "stop_number": 3
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 14,
+    "fields": {
+        "template": 7,
+        "location": 19,
+        "stop_number": 4
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 15,
+    "fields": {
+        "template": 7,
+        "location": 20,
+        "stop_number": 5
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 16,
+    "fields": {
+        "template": 7,
+        "location": 21,
+        "stop_number": 6
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 17,
+    "fields": {
+        "template": 8,
+        "location": 23,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 18,
+    "fields": {
+        "template": 8,
+        "location": 24,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 19,
+    "fields": {
+        "template": 9,
+        "location": 26,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 20,
+    "fields": {
+        "template": 9,
+        "location": 6,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 21,
+    "fields": {
+        "template": 10,
+        "location": 28,
+        "stop_number": 1
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 22,
+    "fields": {
+        "template": 10,
+        "location": 29,
+        "stop_number": 2
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 23,
+    "fields": {
+        "template": 10,
+        "location": 30,
+        "stop_number": 3
+    }
+},
+{
+    "model": "routes.templatestop",
+    "pk": 24,
+    "fields": {
+        "template": 10,
+        "location": 31,
+        "stop_number": 4
+    }
+},
+{
+    "model": "routes.favoriteroute",
+    "pk": 5,
+    "fields": {
+        "user": [
+            "razal"
+        ],
+        "route": 3,
+        "created_at": "2026-03-02T18:13:05.187Z"
+    }
+},
+{
+    "model": "routes.favoriteroute",
+    "pk": 8,
+    "fields": {
+        "user": [
+            "Aswin9495"
+        ],
+        "route": 3,
+        "created_at": "2026-03-03T04:14:34.437Z"
+    }
+},
+{
+    "model": "routes.favoriteroute",
+    "pk": 10,
+    "fields": {
+        "user": [
+            "user1"
+        ],
+        "route": 1,
+        "created_at": "2026-03-03T06:13:50.613Z"
+    }
+},
+{
+    "model": "routes.favoriteroute",
+    "pk": 11,
+    "fields": {
+        "user": [
+            "dhilshadxxx"
+        ],
+        "route": 8,
+        "created_at": "2026-03-03T11:12:31.397Z"
+    }
+},
+{
+    "model": "routes.favoriteroute",
+    "pk": 12,
+    "fields": {
+        "user": [
+            "razal"
+        ],
+        "route": 1,
+        "created_at": "2026-03-03T11:16:20.078Z"
+    }
+},
+{
+    "model": "routes.favoriteroute",
+    "pk": 15,
+    "fields": {
+        "user": [
+            "Aswin1860"
+        ],
+        "route": 1,
+        "created_at": "2026-03-11T14:25:52.032Z"
+    }
+},
+{
+    "model": "routes.favoriteroute",
+    "pk": 16,
+    "fields": {
+        "user": [
+            "Aswin1860"
+        ],
+        "route": 10,
+        "created_at": "2026-03-11T15:11:19.777Z"
+    }
+},
+{
+    "model": "routes.routenotification",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "user1"
+        ],
+        "route": 1,
+        "stop_name": "Kozhikode",
+        "notify_minutes": 15,
+        "created_at": "2026-03-02T06:18:12.800Z"
+    }
+},
+{
+    "model": "routes.routenotification",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "razal"
+        ],
+        "route": 3,
+        "stop_name": "Kozhikode",
+        "notify_minutes": 5,
+        "created_at": "2026-03-02T13:49:53.257Z"
+    }
+},
+{
+    "model": "routes.routenotification",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "dhilshadxxx"
+        ],
+        "route": 8,
+        "stop_name": "Ramanattukara",
+        "notify_minutes": 15,
+        "created_at": "2026-03-03T11:13:06.670Z"
+    }
+},
+{
+    "model": "routes.routenotification",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "razal"
+        ],
+        "route": 1,
+        "stop_name": "Kozhikode",
+        "notify_minutes": 1,
+        "created_at": "2026-03-04T15:36:36.981Z"
+    }
+},
+{
+    "model": "routes.buslivelocation",
+    "pk": 1,
+    "fields": {
+        "bus": 12,
+        "latitude": 10.2316,
+        "longitude": 76.1951,
+        "speed": 0.0,
+        "heading": null,
+        "updated_at": "2026-03-08T19:59:05.185Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 1,
+    "fields": {
+        "ticket_id": "TKT-247029",
+        "user": [
+            "user1"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": true,
+        "created_at": "2026-03-02T06:14:00.482Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 2,
+    "fields": {
+        "ticket_id": "TKT-334698",
+        "user": [
+            "user1"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T06:15:54.917Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 3,
+    "fields": {
+        "ticket_id": "TKT-443508",
+        "user": [
+            "user1"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T06:19:40.207Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 4,
+    "fields": {
+        "ticket_id": "TKT-878006",
+        "user": [
+            "developer"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T06:21:52.756Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 5,
+    "fields": {
+        "ticket_id": "TKT-149724",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T06:23:15.876Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 6,
+    "fields": {
+        "ticket_id": "TKT-637167",
+        "user": [
+            "user1"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Vadakara",
+        "to_loc": "Kannur",
+        "price": "50.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T08:12:13.566Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 7,
+    "fields": {
+        "ticket_id": "TKT-222701",
+        "user": [
+            "razal"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T13:33:09.494Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 8,
+    "fields": {
+        "ticket_id": "TKT-785475",
+        "user": [
+            "razal"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T14:32:45.479Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 9,
+    "fields": {
+        "ticket_id": "TKT-660691",
+        "user": [
+            "user1"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T14:49:28.901Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 10,
+    "fields": {
+        "ticket_id": "TKT-002531",
+        "user": [
+            "user1"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T14:50:14.980Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 11,
+    "fields": {
+        "ticket_id": "TKT-186864",
+        "user": [
+            "razal"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T15:43:11.228Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 12,
+    "fields": {
+        "ticket_id": "TKT-005522",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T16:11:12.288Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 13,
+    "fields": {
+        "ticket_id": "TKT-417634",
+        "user": [
+            "developer"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": true,
+        "created_at": "2026-03-02T16:50:00.418Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 14,
+    "fields": {
+        "ticket_id": "TKT-940962",
+        "user": [
+            "developer"
+        ],
+        "bus": 2,
+        "route": 2,
+        "from_loc": "Kozhikode",
+        "to_loc": "Ernakulam",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-02T17:33:13.071Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 15,
+    "fields": {
+        "ticket_id": "TKT-914285",
+        "user": [
+            "razal"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kodu",
+        "price": "35.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-03T00:47:20.121Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 16,
+    "fields": {
+        "ticket_id": "TKT-827261",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "80.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-03T04:08:24.702Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 17,
+    "fields": {
+        "ticket_id": "TKT-468369",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": true,
+        "created_at": "2026-03-03T04:12:02.338Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 18,
+    "fields": {
+        "ticket_id": "TKT-576152",
+        "user": [
+            "developer"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-03T04:14:41.764Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 19,
+    "fields": {
+        "ticket_id": "TKT-490994",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": true,
+        "created_at": "2026-03-03T04:19:57.972Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 20,
+    "fields": {
+        "ticket_id": "TKT-071247",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-03T04:24:15.341Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 21,
+    "fields": {
+        "ticket_id": "TKT-576537",
+        "user": [
+            "razal"
+        ],
+        "bus": 1,
+        "route": 3,
+        "from_loc": "Kozhikode",
+        "to_loc": "Koduvally",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-03T05:06:48.180Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 22,
+    "fields": {
+        "ticket_id": "TKT-310795",
+        "user": [
+            "dhilshadxxx"
+        ],
+        "bus": 8,
+        "route": 8,
+        "from_loc": "Kozhikode",
+        "to_loc": "Nilambur",
+        "price": "125.00",
+        "passenger_count": 1,
+        "is_verified": true,
+        "created_at": "2026-03-03T11:10:38.618Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 23,
+    "fields": {
+        "ticket_id": "TKT-949792",
+        "user": [
+            "razal"
+        ],
+        "bus": 9,
+        "route": 10,
+        "from_loc": "Nilambur",
+        "to_loc": "Pookkottumpadam",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-04T07:37:27.277Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 24,
+    "fields": {
+        "ticket_id": "TKT-855287",
+        "user": [
+            "razal"
+        ],
+        "bus": 9,
+        "route": 10,
+        "from_loc": "Nilambur",
+        "to_loc": "Pookkottumpadam",
+        "price": "65.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-04T15:35:31.819Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 25,
+    "fields": {
+        "ticket_id": "TKT-874278",
+        "user": [
+            "razal"
+        ],
+        "bus": 9,
+        "route": 10,
+        "from_loc": "Nilambur",
+        "to_loc": "Pookkottumpadam",
+        "price": "15.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-06T16:05:57.464Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 26,
+    "fields": {
+        "ticket_id": "TKT-516823",
+        "user": [
+            "mayavi"
+        ],
+        "bus": 12,
+        "route": 13,
+        "from_loc": "Koduvally",
+        "to_loc": "Narikkuni",
+        "price": "20.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-08T11:35:10.136Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 27,
+    "fields": {
+        "ticket_id": "TKT-351622",
+        "user": [
+            "mayavi"
+        ],
+        "bus": 12,
+        "route": 13,
+        "from_loc": "Koduvally",
+        "to_loc": "Narikkuni",
+        "price": "20.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-08T11:38:26.694Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 28,
+    "fields": {
+        "ticket_id": "TKT-718116",
+        "user": [
+            "mayavi"
+        ],
+        "bus": 12,
+        "route": 13,
+        "from_loc": "Koduvally",
+        "to_loc": "Narikkuni",
+        "price": "20.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-08T11:42:20.303Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 29,
+    "fields": {
+        "ticket_id": "TKT-324054",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "50.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-09T16:14:16.837Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 30,
+    "fields": {
+        "ticket_id": "TKT-601157",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "50.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-09T16:14:16.931Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 31,
+    "fields": {
+        "ticket_id": "TKT-512818",
+        "user": [
+            "Aswin1860"
+        ],
+        "bus": 2,
+        "route": 1,
+        "from_loc": "Kozhikode",
+        "to_loc": "Kannur",
+        "price": "50.00",
+        "passenger_count": 1,
+        "is_verified": false,
+        "created_at": "2026-03-09T16:14:16.975Z"
+    }
+}
+]

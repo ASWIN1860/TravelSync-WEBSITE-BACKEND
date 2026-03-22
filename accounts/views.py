@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from .serializers import RegisterSerializer, UserSerializer, BusRegisterSerializer, SetNewPasswordSerializer
-from .models import BusDetails 
+from .models import BusDetails, Wallet, WalletTransaction
 import logging
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -291,3 +291,80 @@ def reset_password_confirm(request):
 # 4. REMOVED NOTIFICATIONS
 # ==========================================
 
+# ==========================================
+# 5. WALLET MANAGEMENT (TRAVELCOINS)
+# ==========================================
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_wallet_balance(request):
+    try:
+        wallet = Wallet.objects.get(user=request.user)
+        # Fetch the 10 most recent transactions
+        transactions = wallet.transactions.all().order_by('-created_at')[:10]
+        tx_data = []
+        for tx in transactions:
+            tx_data.append({
+                "id": tx.id,
+                "amount": str(tx.amount),
+                "description": tx.description,
+                "date": tx.created_at.strftime("%Y-%m-%d %H:%M")
+            })
+
+        return Response({
+            "balance": str(wallet.balance),
+            "transactions": tx_data
+        }, status=status.HTTP_200_OK)
+    except Wallet.DoesNotExist:
+        return Response({"error": "Wallet not found"}, status=status.HTTP_404_NOT_FOUND)
+
+import razorpay
+from decouple import config
+from decimal import Decimal
+
+RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = config('RAZORPAY_KEY_SECRET')
+client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def verify_add_funds(request):
+    data = request.data
+    razorpay_order_id = data.get('razorpay_order_id')
+    razorpay_payment_id = data.get('razorpay_payment_id')
+    razorpay_signature = data.get('razorpay_signature')
+    amount_in_rupees = data.get('amount') # This is the Rupee amount added
+
+    params_dict = {
+        'razorpay_order_id': razorpay_order_id,
+        'razorpay_payment_id': razorpay_payment_id,
+        'razorpay_signature': razorpay_signature
+    }
+
+    try:
+        # Verify Razorpay signature
+        client.utility.verify_payment_signature(params_dict)
+
+        wallet = Wallet.objects.get(user=request.user)
+        added_amount = Decimal(str(amount_in_rupees))
+        
+        # Add to balance
+        wallet.balance += added_amount
+        wallet.save()
+
+        # Log transaction
+        WalletTransaction.objects.create(
+            wallet=wallet,
+            amount=added_amount,
+            description="Added funds via Razorpay"
+        )
+
+        return Response({
+            "message": f"Successfully added {added_amount} TravelCoins!",
+            "new_balance": str(wallet.balance)
+        }, status=status.HTTP_200_OK)
+
+    except razorpay.errors.SignatureVerificationError:
+        return Response({"error": "Payment Verification Failed"}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from accounts.models import BusDetails
+from accounts.models import BusDetails, WithdrawalRequest
 from routes.models import Route, Location, RouteTemplate
 from bookings.models import Booking
 
@@ -63,4 +63,11 @@ class BookingAdminSerializer(serializers.ModelSerializer):
         model = Booking
         fields = '__all__'
 
-        fields = '__all__'
+class WithdrawalRequestAdminSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    user_email = serializers.EmailField(source='user.email', read_only=True)
+
+    class Meta:
+        model = WithdrawalRequest
+        fields = ['id', 'username', 'user_email', 'amount', 'account_name', 'bank_name', 'account_number', 'ifsc_code', 'status', 'created_at']
+        read_only_fields = ['id', 'username', 'user_email', 'amount', 'account_name', 'bank_name', 'account_number', 'ifsc_code', 'created_at']
