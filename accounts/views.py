@@ -299,7 +299,7 @@ def reset_password_confirm(request):
 @permission_classes([IsAuthenticated])
 def get_wallet_balance(request):
     try:
-        wallet = Wallet.objects.get(user=request.user)
+        wallet, created = Wallet.objects.get_or_create(user=request.user)
         # Fetch the 10 most recent transactions
         transactions = wallet.transactions.all().order_by('-created_at')[:10]
         tx_data = []
@@ -315,8 +315,8 @@ def get_wallet_balance(request):
             "balance": str(wallet.balance),
             "transactions": tx_data
         }, status=status.HTTP_200_OK)
-    except Wallet.DoesNotExist:
-        return Response({"error": "Wallet not found"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 import razorpay
 from decouple import config
@@ -345,7 +345,7 @@ def verify_add_funds(request):
         # Verify Razorpay signature
         client.utility.verify_payment_signature(params_dict)
 
-        wallet = Wallet.objects.get(user=request.user)
+        wallet, created = Wallet.objects.get_or_create(user=request.user)
         added_amount = Decimal(str(amount_in_rupees))
         
         # Add to balance
