@@ -66,8 +66,16 @@ class BookingAdminSerializer(serializers.ModelSerializer):
 class WithdrawalRequestAdminSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
     user_email = serializers.EmailField(source='user.email', read_only=True)
+    operator_balance = serializers.SerializerMethodField()
 
     class Meta:
         model = WithdrawalRequest
-        fields = ['id', 'username', 'user_email', 'amount', 'account_name', 'bank_name', 'account_number', 'ifsc_code', 'status', 'created_at']
-        read_only_fields = ['id', 'username', 'user_email', 'amount', 'account_name', 'bank_name', 'account_number', 'ifsc_code', 'created_at']
+        fields = ['id', 'username', 'user_email', 'amount', 'account_name', 'bank_name', 'account_number', 'ifsc_code', 'status', 'created_at', 'operator_balance']
+        read_only_fields = ['id', 'username', 'user_email', 'amount', 'account_name', 'bank_name', 'account_number', 'ifsc_code', 'created_at', 'operator_balance']
+
+    def get_operator_balance(self, obj):
+        try:
+            # The withdrawal request user is the bus operator
+            return str(obj.user.bus_details.total_earnings)
+        except Exception:
+            return "0.00"
