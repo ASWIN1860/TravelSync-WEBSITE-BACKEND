@@ -214,6 +214,24 @@ def toggle_booking_status(request):
     except BusDetails.DoesNotExist:
         return Response({"error": "Bus profile not found"}, status=404)
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_crowd_status(request):
+    status_choice = request.data.get('status')
+    if status_choice not in ['green', 'yellow', 'red']:
+        return Response({"error": "Invalid status choice"}, status=status.HTTP_400_BAD_REQUEST)
+        
+    try:
+        bus = BusDetails.objects.get(user=request.user)
+        bus.crowd_status = status_choice
+        bus.save()
+        return Response({
+            "crowd_status": bus.crowd_status,
+            "message": f"Crowd status updated to {status_choice.title()}"
+        })
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Bus profile not found"}, status=404)
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_bus_profile(request):
@@ -223,6 +241,7 @@ def get_bus_profile(request):
             "upi_id": bus.upi_id,
             "total_earnings": bus.total_earnings,
             "is_booking_open": bus.is_booking_open, 
+            "crowd_status": bus.crowd_status,
         })
     except BusDetails.DoesNotExist:
         return Response({"error": "Bus profile not found"}, status=404)

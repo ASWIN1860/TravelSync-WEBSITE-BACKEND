@@ -27,6 +27,14 @@ class BusDetails(models.Model):
     # Wallet to track earnings
     total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00) 
 
+    # Crowd Control Status (green=low, yellow=medium, red=overcrowded)
+    CROWD_CHOICES = (
+        ('green', 'Green'),
+        ('yellow', 'Yellow'),
+        ('red', 'Red'),
+    )
+    crowd_status = models.CharField(max_length=10, choices=CROWD_CHOICES, default='green')
+
     is_booking_open = models.BooleanField(default=False)
 
 
