@@ -7,7 +7,8 @@ from .views import (
     RouteViewSet,
     RouteTemplateViewSet,
     BookingViewSet,
-    WithdrawalRequestViewSet
+    WithdrawalRequestViewSet,
+    get_platform_balance
 )
 
 router = DefaultRouter()
@@ -20,5 +21,6 @@ router.register(r'bookings', BookingViewSet, basename='admin-booking')
 router.register(r'withdrawals', WithdrawalRequestViewSet, basename='admin-withdrawal')
 
 urlpatterns = [
+    path('platform-balance/', get_platform_balance, name='admin-platform-balance'),
     path('', include(router.urls)),
 ]

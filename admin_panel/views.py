@@ -1,7 +1,10 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
-from accounts.models import BusDetails, WithdrawalRequest
+from accounts.models import BusDetails, WithdrawalRequest, Wallet
+from django.db.models import Sum
 from routes.models import Route, Location, RouteTemplate
 from bookings.models import Booking
 from django.core.mail import send_mail
@@ -83,3 +86,19 @@ class WithdrawalRequestViewSet(viewsets.ModelViewSet):
                 bus.save()
             except BusDetails.DoesNotExist:
                 pass
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def get_platform_balance(request):
+    try:
+        total_wallets = Wallet.objects.aggregate(Sum('balance'))['balance__sum'] or 0
+        total_earnings = BusDetails.objects.aggregate(Sum('total_earnings'))['total_earnings__sum'] or 0
+        total_pending_withdrawals = WithdrawalRequest.objects.filter(status='pending').aggregate(Sum('amount'))['amount__sum'] or 0
+        
+        total_held_funds = total_wallets + total_earnings + total_pending_withdrawals
+        
+        return Response({
+            "total_platform_revenue": str(total_held_funds)
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
