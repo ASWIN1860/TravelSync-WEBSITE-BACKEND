@@ -25,6 +25,7 @@ class RouteSerializer(serializers.ModelSerializer):
     end_location_data = serializers.DictField(write_only=True, required=False)
     stop_list = RouteStopSerializer(source='stops', many=True, read_only=True)
     bus_name = serializers.CharField(source='bus.bus_name', read_only=True)
+    bus_reg_number = serializers.CharField(source='bus.reg_number', read_only=True)
     
     # --- OPTIMIZATION: Get Status Directly ---
     is_booking_open = serializers.BooleanField(source='bus.is_booking_open', read_only=True)
@@ -37,7 +38,7 @@ class RouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = ['id', 'bus_name', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open', 'effective_status', 'start_location_data', 'end_location_data', 'start_lat', 'start_lng', 'end_lat', 'end_lng']
+        fields = ['id', 'bus_name', 'bus_reg_number', 'start_location', 'end_location', 'via', 'trips', 'stops', 'stop_list', 'is_booking_open', 'effective_status', 'start_location_data', 'end_location_data', 'start_lat', 'start_lng', 'end_lat', 'end_lng']
 
     def get_start_lat(self, obj):
         from .models import Location
