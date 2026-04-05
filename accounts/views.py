@@ -15,6 +15,9 @@ from django.conf import settings
 from django.utils import timezone
 from .tokens import custom_token_generator # <--- CRITICAL IMPORT
 import random
+from datetime import timedelta
+from django.db.models import Sum
+from bookings.models import Booking
 
 
 logger = logging.getLogger(__name__)
@@ -387,3 +390,38 @@ def verify_add_funds(request):
         return Response({"error": "Payment Verification Failed"}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+# ==========================================
+# 6. OPERATOR DASHBOARD STATS
+# ==========================================
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_operator_dashboard_stats(request):
+    try:
+        operator_bus = BusDetails.objects.get(user=request.user)
+        
+        today = timezone.localtime().date()
+        week_ago = today - timedelta(days=7)
+        
+        bus_bookings = Booking.objects.filter(bus=operator_bus)
+        
+        today_tickets = bus_bookings.filter(created_at__date=today).count()
+        weekly_tickets = bus_bookings.filter(created_at__date__gte=week_ago).count()
+        today_verified_tickets = bus_bookings.filter(created_at__date=today, is_verified=True).count()
+        
+        total_amount = bus_bookings.filter(created_at__date=today, is_verified=True).aggregate(Sum('price'))['price__sum']
+        total_amount_today = float(total_amount) if total_amount else 0.0
+
+        return Response({
+            "today_tickets": today_tickets,
+            "weekly_tickets": weekly_tickets,
+            "today_verified_tickets": today_verified_tickets,
+            "today_amount_collected": total_amount_today
+        }, status=status.HTTP_200_OK)
+
+    except BusDetails.DoesNotExist:
+        return Response({"error": "Only Bus Operators can view stats."}, status=status.HTTP_403_FORBIDDEN)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

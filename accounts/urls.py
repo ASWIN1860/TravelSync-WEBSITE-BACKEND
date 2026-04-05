@@ -26,4 +26,5 @@ urlpatterns = [
     # Wallet Enpoints
     path('wallet/', views.get_wallet_balance, name='get_wallet_balance'),
     path('wallet/verify-add-funds/', views.verify_add_funds, name='verify_add_funds'),
+    path('operator-stats/', views.get_operator_dashboard_stats, name='get_operator_stats'),
 ]
